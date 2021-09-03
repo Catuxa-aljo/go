@@ -1,0 +1,14 @@
+{
+    "Tickets": {
+        "text": "Tickets",
+        "icon": "fas fa-landmark"
+    },
+    "TravelInsurance": {
+        "text": "TravelInsurance",
+        "icon": "fas fa-landmark"
+    },
+    "Plane": {
+        "text": "Plane tickets",
+        "icon": "fas fa-landmark"
+    }
+}
