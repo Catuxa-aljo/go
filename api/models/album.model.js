@@ -1,38 +1,29 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
-const Location = new Schema ({
+const albumSchema = new Schema ({
     title: {
-        type: String
+        type: String   
+    },
+    pictures : {
+        type: []
     },
     travel: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Travel',
-        required: true,
-    },
-
-    longitude: {
-       
-    },
-    latitude: {
-
-    },
-
+    }
+}, {
     timestamps: true,
     toJSON: {
         transform: (doc, ret) => {
             ret.id = doc.id;
             delete ret._id;
-            delete ret._v;
+            delete ret.__v;
             delete ret.password;
-
             return ret
             }
         },
-
 })
 
-const Location = mongoose.model('Location', schema);
-module.exports = Location
-
-
+const Album = mongoose.model('Album', albumSchema)
+module.exports = Album

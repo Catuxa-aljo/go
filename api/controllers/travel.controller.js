@@ -1,17 +1,15 @@
+const Like = require('../models/like.model');
 const Travel = require('../models/travel.model');
 
 module.exports.create = (req, res, next) => {
     const travel = {title, description, participants, startingDate, endDate} = req.body;
-    Travel.create ({...travel, user: req.user.id})
-        .then(travel => {
-            res.json(travel)
-        })
+    Travel.create ({...travel, user: req.user.id, cover: req?.file.path})
+        .then(travel => res.json(travel))
         .catch(next)
 }
 
 module.exports.list = (req, res, next) => {  
-    res.json(req.travels)          
-        
+    res.json(req.travels)       
 }
 
 module.exports.listAll = (req, res, next) => {
@@ -39,3 +37,11 @@ module.exports.delete = (req, res, next) => {
         .then(() => res.status(204).end())
         .catch(next)
 }
+
+module.exports.savedTravels = (req, res, next) => {
+    Like.find({user: req.user})
+        .populate('travel')
+        .then(travels => res.json(travels))
+        .catch(next)
+}
+

@@ -8,6 +8,7 @@ const passport = require('passport');
 
 require('./config/passport.config');
 require('./config/db.config');
+const cors = require('./config/cors.config')
 const session = require('./config/session.config');
 
 const app = express();
@@ -16,7 +17,7 @@ const app = express();
 app.use(logger('dev'));
 const {sessionConfig} = require('./config/session.config')
 app.use(sessionConfig);
-
+app.use(cors);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());

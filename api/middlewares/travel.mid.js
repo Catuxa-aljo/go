@@ -1,10 +1,13 @@
 const Travel = require('../models/travel.model')
+const TravelEvent = require('../models/travelEvent.model')
 const createError = require('http-errors');
 
-module.exports.exits = (req, res, next) => {
-  
+module.exports.exists = (req, res, next) => {  
 const id = req.params.id;
 Travel.findById(id)
+    .populate('user')
+    .populate('events')
+    .populate('albums')
     .then(travel => {
         if(travel) {
             req.travel = travel;
@@ -14,11 +17,9 @@ Travel.findById(id)
         }
     })
     .catch(next)
-
 }
 
 module.exports.areOwned = (req, res, next) => {
-
     const travelCriteria = { user: req.user.id }
     Travel.find(travelCriteria)
         .then(travels => { 
@@ -27,17 +28,12 @@ module.exports.areOwned = (req, res, next) => {
             }
         )
         .catch(next)
-
 }
 
-module.exports.isOwned = (req, res, next) => {
-    
+module.exports.isOwned = (req, res, next) => {    
             if (req.travel.user.id == req.params.id) {
                 next()
             } else {
                 next(createError(403, 'You can not do that'))
             }            
-      
-        
-
 }

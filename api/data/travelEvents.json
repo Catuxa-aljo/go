@@ -10,5 +10,29 @@
     "Plane": {
         "text": "Plane tickets",
         "icon": "fas fa-landmark"
+    },
+    "Bookings": {
+        "text": "Bookings",
+        "icon": "fas fa-landmark"
+    },
+    "RestaurantsBookings": {
+        "text": "Restaurants Bookings",
+        "icon": "fas fa-landmark"
+    },
+    "Rentals" : {
+        "text": "Rentals",
+        "icon": "fas fa-landmark"
+    },
+    "Lugage" : {
+        "text": "Lugage",
+        "icon": "fas fa-landmark"
+    },
+    "Transport": {
+        "text": "Transport",
+        "icon": "fas fa-landmark"
+    },
+    "Others" : {
+        "Others" : "Others",
+        "icon": "fas fa-landmark"
     }
 }

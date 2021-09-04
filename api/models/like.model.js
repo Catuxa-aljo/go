@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const reviewSchema = new Schema ({
-  
-    comments: {
-        type: String
-    },
-    stars: {
-        type: Number
-    },
-    event: {
+const likeSchema = new Schema ({
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'TravelEvent',
+        ref: 'User'
     },
+    travel: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Travel'
+    }
 },
 {
     timestamps: true,
@@ -22,11 +19,10 @@ const reviewSchema = new Schema ({
             delete ret._id;
             delete ret.__v;
             delete ret.password;
-
             return ret
             }
-        },
+        },                                                 
 })
 
-const Review = mongoose.model('Review', reviewSchema);
-module.exports = Review
+const Like = mongoose.model('Like', likeSchema)
+module.exports = Like

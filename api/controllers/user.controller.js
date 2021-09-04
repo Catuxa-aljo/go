@@ -4,7 +4,6 @@ const passport = require('passport');
 const { exists } = require('../models/user.model');
 
 module.exports.create = (req, res, next) => {
-
     User.findOne({ email: req.body.email })
         .then(user => {
             if(user) {
@@ -30,7 +29,6 @@ module.exports.login = (req, res, next) => {
           })
         }
       })(req, res, next);
-
 }
 
 module.exports.logout = (req,res, next) => {
@@ -39,7 +37,12 @@ module.exports.logout = (req,res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const userEdited = {name, avatar, password } = req.body;
+   const userEdited = { name, avatar, password } = req.body;
+
+   if(req.file) {
+    userEdited.avatar = req.file.path
+    }
+
     if (req.user) {
       Object.assign(req.user, userEdited)
       req.user.save()
@@ -47,8 +50,7 @@ module.exports.edit = (req, res, next) => {
           .catch(next) 
     } else {
       next(createError(400, 'You need to be logged'))
-
-        }
+    }
 }
 
 module.exports.profile = (req, res, next) => {

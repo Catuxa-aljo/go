@@ -10,18 +10,22 @@ const travelEventschema = new Schema({
         description: {
             type: String
         },
-/*         category: {
+         category: {
             type: [{
                 type: String,
-                enum: travelEvents,
+                enum: Object.keys(travelEvents)
             }],
-        }, */
+        },
         startDate: {
             type:String,
         },
         endDate: {
             type:String
         },
+        time: {
+            type:String,
+        },
+
         price: {
             type:Number
         },
@@ -46,6 +50,7 @@ const travelEventschema = new Schema({
     {
         timestamps: true,
         toJSON: {
+            virtuals: true,
             transform: (doc, ret) => {
                 ret.id = doc.id;
                 delete ret._id;
@@ -57,6 +62,13 @@ const travelEventschema = new Schema({
             },
     }
 )
+
+travelEventschema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'event',
+    justOne: false
+})
 
 const TravelEvent = mongoose.model('TravelEvent', travelEventschema);
 module.exports = TravelEvent

@@ -26,10 +26,14 @@ const travelSchema = new Schema ({
             ref: 'User',
             required: true,
         },
+        budget: {
+            type: Number
+        }
     },
     {
         timestamps: true,
         toJSON: {
+            virtuals: true,
             transform: (doc, ret) => {
                 ret.id = doc.id;
                 delete ret._id;
@@ -42,6 +46,20 @@ const travelSchema = new Schema ({
 
     }
 )
+
+travelSchema.virtual('events', {
+    ref: 'TravelEvent',
+    localField: '_id',
+    foreignField: 'travel',
+    justOne: false
+});
+
+travelSchema.virtual('albums', {
+    ref: 'Album',
+    localField: '_id',
+    foreignField: 'travel',
+    justOne: false
+})
 
 const Travel = mongoose.model('Travel', travelSchema);
 module.exports = Travel
