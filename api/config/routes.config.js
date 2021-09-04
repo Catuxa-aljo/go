@@ -37,7 +37,7 @@ router.post('/my-travels/events/:id', secure.isAuthenticated, events.exists, eve
 router.get('/my-travels/review/:id', secure.isAuthenticated, reviews.exists, review.detail)
 router.delete('/my-travels/review/:id', secure.isAuthenticated, reviews.exists, reviews.isOwned, review.delete)
 
-router.post('/my-travels/:id/album', secure.isAuthenticated, travels.exists, travels.areOwned, upload.array('pictures'), album.create)
+router.post('/my-travels/:id/album', secure.isAuthenticated, travels.exists, travels.isOwned, upload.array('pictures'), album.create)
 router.get('/my-travels/album/:id', secure.isAuthenticated, albums.exists, album.detail)
 router.delete('/my-travels/album/:id', secure.isAuthenticated, albums.exists, albums.isOwned, album.delete)
 

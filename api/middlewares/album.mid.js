@@ -1,6 +1,5 @@
 const Album = require('../models/album.model');
 const createError = require('http-errors');
-const Travel = require('../models/travel.model');
 
 module.exports.exists = (req, res, next) => {
     const id = req.params.id
@@ -18,8 +17,6 @@ module.exports.exists = (req, res, next) => {
 }
 
 module.exports.isOwned = (req, res, next) => {
-    console.log(`user: ${req.album.travel.user} req.user: ${req.user.id}`)
-
             if(req.album.travel.user == req.user.id) {
                 next()
             } else {

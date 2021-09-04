@@ -30,8 +30,8 @@ module.exports.areOwned = (req, res, next) => {
         .catch(next)
 }
 
-module.exports.isOwned = (req, res, next) => {    
-            if (req.travel.user.id == req.params.id) {
+module.exports.isOwned = (req, res, next) => {   
+            if (req.travel.user.id == req.user.id) {
                 next()
             } else {
                 next(createError(403, 'You can not do that'))
