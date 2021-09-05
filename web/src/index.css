@@ -1,0 +1,103 @@
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar{
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+}
+
+.navbar-brand img {
+  max-width: 100px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  width: 100%;
+  height: 100%;
+}
+
+.home h1 {
+  color: #fff;
+  font-size: 3rem;
+}
+
+.home h2 {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.home img {
+  max-width: 400px;
+}
+
+.home a, button{
+  background-color: indianred !important;
+  color: #fff !important;
+  font-size: 1rem;
+  border-radius: 15px !important;
+  border: thin solid #fff !important;
+  padding: 1% !important;
+  text-decoration: none !important;
+  max-width: 250px;
+  font-family: 'open_sansbold';
+  margin: 3%;
+  text-align: center;
+  transition-duration: 0.4s;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.home a:hover, button:hover {
+  background-color: crimson !important;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0);
+}
+
+section {
+  padding: 5%;
+  display: flex;
+
+}
+
+section h2 {
+  color:#00C9FF;
+  font-family: 'antonregular';
+}
+
+section h3 {
+  color: #92FE9D;
+  font-size: 1.5rem;
+  font-family:'antonregular';
+}
+
+section h5 {
+  font-size: 0.8rem;
+}
+
+#register {
+  flex-direction: column;
+}
+
+#register input {
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  color: #fff;
+}
+
+.input-group {
+  margin: 2% 0
+}
+
+.card h3 {
+  color: #92FE9D;
+  font-size: 'open_sanslight' ;
+}
+
+.row >* {
+  padding: 0;
+  text-align: center;
+}

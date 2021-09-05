@@ -53,6 +53,10 @@ module.exports.edit = (req, res, next) => {
     }
 }
 
+module.exports.detail = (req, res, next) => {
+  res.json(req.user)
+}
+
 module.exports.profile = (req, res, next) => {
   User.findById(req.params.id)
     .then(user => {

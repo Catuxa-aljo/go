@@ -9,10 +9,8 @@ const passport = require('passport');
 require('./config/passport.config');
 require('./config/db.config');
 const cors = require('./config/cors.config')
-const session = require('./config/session.config');
 
 const app = express();
-
 
 app.use(logger('dev'));
 const {sessionConfig} = require('./config/session.config')
