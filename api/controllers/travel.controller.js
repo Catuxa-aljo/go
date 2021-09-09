@@ -3,13 +3,21 @@ const Travel = require('../models/travel.model');
 
 module.exports.create = (req, res, next) => {
     const travel = {title, description, participants, startingDate, endDate} = req.body;
-    Travel.create ({...travel, user: req.user.id, cover: req?.file.path})
+    Travel.create ({...travel, user: req.user.id, cover: req?.file?.path})
         .then(travel => res.json(travel))
         .catch(next)
 }
 
 module.exports.list = (req, res, next) => {  
-    res.json(req.travels)       
+    const select = req.query.select
+    if(select === 'all'){
+        Travel.find()
+        .then(travels => res.json(travels))
+        .catch(next) 
+
+    } else if (select === 'mine'){
+        res.json(req.travels)   
+    }  
 }
 
 module.exports.listAll = (req, res, next) => {
@@ -23,7 +31,11 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const data = {title, description, participants, startingDate, endDate} = req.body
+    const data = {title, description, participants, startingDate, endDate} = req.body    
+    if(req.file) {
+        travel.cover = req.file.path
+        }
+
     Object.assign(req.travel, data)
         req.travel.save()
             .then( travel => {

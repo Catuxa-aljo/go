@@ -4,6 +4,9 @@ import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import TravelList from "./components/travels/list/Travel-list";
 import Login from "./components/user/auth/Auth";
+import EventDetail from "./components/events/EventDetail";
+import Me from "./components/user/auth/Me";
+
 
 
 function App() {
@@ -12,9 +15,13 @@ function App() {
     <Header/>    
     <Switch>
       <Route exact path="/" component={ Home } />
+      <Route exact path="/me" component={ Me } />
       <Route exact path="/travels" component={ TravelList } />
+      <Route exact path="/my-travels" component={ TravelList } />
       <Route exact path="/my-travels/:id" component={ TravelDetail} />
+      <Route exact path="/my-travels/events/:id" component= { EventDetail } />
       <Route exact path="/login" component={ Login } />
+
       <Redirect to="/" />
     </Switch>
     </>

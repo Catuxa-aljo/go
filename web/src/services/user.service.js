@@ -1,6 +1,6 @@
 import http from "./base-api-services";
 
-const create = (user) => http.post('/register', user);
+const create = (user) => http.post('/', user);
 const detail = (id) => http.get(`/user/${id}`);
 const profile = () => http.get('/me');
 const edit = (user) => http.patch('/me', user);

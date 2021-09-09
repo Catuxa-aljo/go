@@ -1,6 +1,6 @@
 import Moment from 'react-moment';
 
-function TravelItem ({id, title, cover, description, startingDate}) {
+function TravelItem ({id, title, cover, description, startingDate, events}) {
     return (
         <div className="card col-3">
             <img src={cover} className="card-img-top" alt={title}/>

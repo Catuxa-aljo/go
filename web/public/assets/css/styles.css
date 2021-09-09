@@ -47,4 +47,10 @@
   p {
       font-size: 0.9rem;
   }
+
+  #register input > .bg-danger input{
+    background: transparent;
+    background-color: darksalmon !important;
+  }
+  
   
