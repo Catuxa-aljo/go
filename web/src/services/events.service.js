@@ -1,10 +1,12 @@
 import http from "./base-api-services";
 
-const detail = (id) => http.get(`/my-travels/events/${id}`)
-const create = (event, id) => http.post(`/my-travels/${id}`, event)
+const detail = (id) => http.get(`/my-travels/events/${id}`);
+const create = (id, event) => http.post(`/my-travels/${id}`, event);
+const remove = (id) => http.delete(`/my-travels/events/${id}`)
 
 const service = {
     detail,
-    create
+    create,
+    remove
 }
 export default service

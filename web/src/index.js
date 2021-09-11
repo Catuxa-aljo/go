@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-vertical-timeline-component/style.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './contexts/AuthContext';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 
 ReactDOM.render(

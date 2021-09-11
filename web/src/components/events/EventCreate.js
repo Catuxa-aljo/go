@@ -39,7 +39,7 @@ function EventNew(props) {
     function handleSubmit(e) {
         e.preventDefault()
         const id = props.match?.params?.id;
-        eventService.create(event, id)
+        eventService.create(id, event)
                 .then(() => history.push('/travels'))
         
     }

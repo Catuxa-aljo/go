@@ -45,7 +45,7 @@ function Header () {
                        
                          <li className="nav-item">
                            {!auth.user && <NavLink className="nav-link" exact to="/login">Login</NavLink>}
-                           {auth.user && <NavLink className="nav-link" exact to="/me"><span className="me-3">{auth.user?.avatar}</span></NavLink>}
+                           {auth.user && <NavLink className="nav-link" exact to="/me"><span className="me-3"><img className="avatar" src={auth.user?.avatar} alt="user avatar" /></span></NavLink>}
                         </li>
                         <li className="nav-item">
                         {!auth.user &&<NavLink className="nav-link" exact to="/#register">Register</NavLink>}

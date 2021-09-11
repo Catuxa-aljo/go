@@ -28,3 +28,4 @@ module.exports.delete = (req, res, next) => {
         .then(() => res.status(204).end() )
         .catch(next)
 }
+
