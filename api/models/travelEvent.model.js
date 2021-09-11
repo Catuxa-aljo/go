@@ -29,7 +29,8 @@ const travelEventschema = new Schema({
         },
 
         price: {
-            type:Number
+            type:Number,
+            default: 0
         },
         status: {
             type: Boolean,
@@ -47,6 +48,9 @@ const travelEventschema = new Schema({
             },
             coordinates: [Number]
         },
+        url: {
+            type: String
+        }
 
     },
     {

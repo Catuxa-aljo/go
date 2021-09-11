@@ -15,7 +15,7 @@ function TravelInsurance(props) {
         <>
         {console.log(`Category: ${props.searchCategory}`)}
         <div>       
-            {eventsInsurance.map(event => <div>{event.name} <i className="far fa-trash-alt stretched-link" role="button" onClick={handleDelete}></i></div>)} 
+            {eventsInsurance.map(event => <div key={event.id}><NavLink exact to={`/my-travels/events/${event.id}`}> {event.name}</NavLink> <i className="far fa-trash-alt" role="button" onClick={handleDelete}></i></div>)} 
         </div>
         <EventNew category={props.searchCategory}/>
         </>

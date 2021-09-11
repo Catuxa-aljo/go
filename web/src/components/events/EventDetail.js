@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import eventService from '../../services/events.service'
 import { useHistory } from 'react-router-dom'
+import EventEdit from './EventEdit'
 
 function EventDetail(props) {
 
@@ -28,7 +29,8 @@ function EventDetail(props) {
        {!isLoading && <div>
             <h1>{event.name}</h1>
             <h1>{event.category}</h1>
-            <i className="far fa-trash-alt stretched-link" role="button" onClick={handleDelete}></i>
+            <i className="far fa-trash-alt" role="button" ></i>            
+            <EventEdit {...event} />
         </div>}
         </>
     )

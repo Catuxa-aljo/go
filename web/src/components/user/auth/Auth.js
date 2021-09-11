@@ -87,7 +87,7 @@ function Login () {
             <p>Lorem fistrum a gramenawer por la gloria de mi madre pupita al ataquerl llevame al sircoo la caidita. Jarl está la cosa muy malar a gramenawer a peich no te digo trigo por no llamarte Rodrigor no puedor diodenoo caballo blanco caballo negroorl apetecan. Apetecan no te digo trigo por no llamarte Rodrigor a peich tiene musho peligro quietooor qué dise usteer amatomaa sexuarl mamaar se calle ustée por la gloria de mi madre. Está la cosa muy malar no puedor jarl hasta luego Lucas no puedor me cago en tus muelas benemeritaar mamaar ese pedazo de a wan quietooor. No puedor no te digo trigo por no llamarte Rodrigor mamaar caballo blanco caballo negroorl pupita fistro la caidita hasta luego Lucas amatomaa. Qué dise usteer sexuarl de la pradera pecador.</p>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i class="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
                     <input 
                         name="email" 
                         type="text" 
@@ -101,7 +101,7 @@ function Login () {
                     {touched.email && errors.email}
                 </div>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i class="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
                     <input 
                         name="password" 
                         type="password"

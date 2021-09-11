@@ -52,5 +52,9 @@
     background: transparent;
     background-color: darksalmon !important;
   }
+
+  .container {
+    padding-top: 10%;
+  }
   
   

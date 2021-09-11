@@ -1,98 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react'
 import travelService from '../../../services/travel.service'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-const validations = {
-    title: (value) => {
-        let message;
-        if(!value) {
-            message = 'Your travel needs a title'
-        }
-        return message
-    },
-    startingDate: (value) => {
-        let message;
-        if(!value) {
-            message = 'Please insert a start date for your travel'
-        }
-        return message
-    },
-    endDate: (value) => {
-        let message;
-        if(!value) {
-            message = 'Please insert an ending date for your trip'
-        } 
-         else if(value < validations.startingDate.value ) {
-            message = 'Your ending date has to be after your starting date'
-        }
-        return message
-    }
-}
 
-function TravelNew() {
-    const history = useHistory()
-    const id = useParams()
+function TravelEdit({title, description, participants, startingDate, endDate, cover, budget}) {
+
+    const { id } = useParams()
 
     const [ travel, setTravel ] = useState({
-        title: '',        
-        description:'',
-        participants: [],
-        startingDate:'',
-        endDate: '',
-        cover:'',        
-        budget: 0
+        title: title,
+        description: description,
+        participants: participants,
+        startingDate: startingDate,
+        endDate: endDate,
+        cover: cover,      
+        budget: budget
     })
 
-    const [errors, setErrors] = useState({
-        title: validations.title('') ,
-        startingDate: validations.startingDate(''),
-        endDate: validations.endDate('')
-    })
+    const [ touched, setTouched ] = useState()
 
-    const [touched, setTouched] = useState({})
-
-    function handleChange (event) {
+    function handleChange(event) {
         const { name, value } = event.target;
         setTravel({
             ...travel,
-            [name]: value
-        })
-        setErrors({
-            ...errors,
-            [name] : validations[name] ? validations[name](value) : undefined
+            [name] : value
         })
     }
 
-    function handleBlur(event) {
-        const { name } = event.target
-        setTouched({
-            ...touched,
-            [name]: true
-        })
+    function handleSubmit(e) {
+        e.preventDefault()
+        travelService.edit(id, travel)
+            .then(travel => travelService.detail(travel.id))  
     }
 
-    function handleSubmit (event) {
-        event.preventDefault()
-        travelService.create(travel)
-            .then(travel => history.push(`/my-travels/${travel.id}`) )
-            .catch(error  => {
-                const { errors, message} = error.response?.data || error;
-                const touched =  Object.keys(errors || {}).reduce((touched, key) => {
-                    touched[key] = true;
-                    return touched;
-                }, {});           
-                setErrors({...errors,
-                        title : errors ? undefined : message,
-                        startingDate : errors ? undefined : message,
-                        endDate : errors ? undefined : message,
-                })
-                setTouched({... touched,
-                        title: errors ? false : true,
-                        startingDate: errors ? false : true,
-                        endDate: errors ? false : true,
-                })
-            })
-    }
 
     return(
         <div className="container">
@@ -107,12 +47,11 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             className="form-control"
                             value={travel.title} 
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="Your name" 
                             aria-label="Name" 
                             aria-describedby="Add your name"/>
                 </div>
-                {touched.title && <div>{errors.title}</div>}
+              
                 <div className="form-floating">
                     <textarea 
                             name="description"
@@ -120,7 +59,7 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             placeholder="Add your travel description" 
                             id="floatingTextarea2"
                             defaultValue={travel.description}>
-                              
+                               
                     </textarea>
                     <label htmlFor="floatingTextarea2">Description</label>
                 </div>
@@ -131,12 +70,11 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             className="form-control"
                             value={travel.startingDate} 
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="When does your travel starts?" 
                             aria-label="startingDate" 
                             aria-describedby="When does your travel starts?"/>
                 </div>
-                {touched.startingDate && <div>{errors.startingDate}</div>}
+                
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
                     <input  name="endDate" 
@@ -144,18 +82,15 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             className="form-control"
                             value={travel.endDate}
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="When does your travel ends?" 
                             aria-label="endDate" 
                             aria-describedby="When does your travel ends?"/>
                 </div>
-                {touched.endDate && <div>{errors.endDate}</div>}
+               
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
                     <input  name="cover" 
                             type="file" 
-                            onChange={handleChange}
-                            value={travel.cover}
                             className="form-control" 
                             placeholder="Add a cover for your travel" 
                             aria-label="Cover" 
@@ -167,7 +102,6 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             type="number" 
                             className="form-control"
                             value={travel.budget}
-                            onChange={handleChange}
                             placeholder="Do you wanna set an initial budget?" 
                             aria-label="budget" 
                             aria-describedby="Do you wanna set an initial budget?"/>
@@ -178,7 +112,6 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
 
         </div>
     )
-
 }
 
-export default TravelNew
+export default TravelEdit

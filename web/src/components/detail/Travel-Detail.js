@@ -7,16 +7,21 @@ import Timeline from "../timeline/TimeLine";
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import NewCalendar from "../calendar/NewCalendar";
 import Moment from "react-moment";
+import TravelEdit from "../travels/list/Travel-Edit";
+import { useParams, useHistory } from 'react-router-dom'
+
 
 
 function TravelDetail(props) {
+  const { id } = useParams();
+  const history = useHistory();
+
   const [travel, setTravel] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [insurance, setEvents] = useState(false)
-  const [budget, setBudget] = useState(false)
+  
+
 
   useEffect(() => {
-    const id = props.match?.params?.id;
     travelService
       .detail(id)
       .then((data) => {
@@ -26,12 +31,10 @@ function TravelDetail(props) {
       .catch((error) => console.error(error));
   }, []);
 
-  function handleEvents() {    
-    setEvents(true)   
-  }
 
-  function handleBudget() {
-    setBudget(true)
+  function handleDelete() {
+    travelService.remove(id)
+      .then(() => history.push('/my-travels'))
   }
 
   return (
@@ -44,52 +47,39 @@ function TravelDetail(props) {
           <h3>From <Moment format="YYYY/MM/DD">{travel.startingDate}</Moment> to <Moment format="YYYY/MM/DD">{travel.endDate}</Moment></h3>
           <h2>{travel.description}</h2>
           <h3>{travel.participants}</h3>
+          <h3><i className="far fa-trash-alt" role="button" onClick={handleDelete}></i></h3>
         </div>
 
         <div className="col col-lg-8">  
+        <div>
+        <a href="#" name="TravelInsurance">travel insurance</a>
+        
+        <Events events={travel.events} searchCategory='TravelInsurance' />
+                 
+        </div>
         <NewCalendar {...travel} />
         <VerticalTimeline>
-        {travel.events.map(event => <Timeline {...event} />)}
+        {travel.events.map(event => <Timeline key={event.id} {...event} />)}
         </VerticalTimeline>
-
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-          <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"/>
-          <label class="btn btn-outline-primary" for="btncheck1">PLANIFICATION</label>
-
-          <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off"/>
-          <label class="btn btn-outline-primary" for="btncheck2">CALENDAR</label>
-
-          <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off"/>
-          <label class="btn btn-outline-primary" for="btncheck3">POST</label>
-        </div>
      
-        <div>
-        <a href="#" name="TravelInsurance" onClick={handleEvents}>travel insurance</a>
-        {insurance && 
-        <Events events={travel.events} searchCategory='TravelInsurance' />
-        }
-          
-        </div>
-
-        
-
         <NavLink to={`/my-travels/${travel.id}/events`}>
           <img src="./assets/img/go-voyager" />
           <h3>EVENTOS</h3>
         </NavLink>
       </div>
       <div className="col col-lg-1">
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">BUDGET</button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
+      <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">BUDGET</button>
+      <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div className="offcanvas-header">
           <h5 id="offcanvasRightLabel">BUDGET</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div className="offcanvas-body">
         <Budget {...travel} />
         </div>
       </div>
       </div>
+      <TravelEdit {...travel} />
       </div>
      
       }

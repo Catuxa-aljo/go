@@ -38,7 +38,7 @@ function Header () {
                             <NavLink className="nav-link"exact to="/travels">Get inspired</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">My travels</a>
+                            <NavLink className="nav-link" exact to="/" >My travels</NavLink>
                         </li>
                     </ul>
                     <ul className="navbar-nav">

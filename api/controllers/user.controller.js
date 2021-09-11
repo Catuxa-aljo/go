@@ -38,19 +38,16 @@ module.exports.logout = (req,res, next) => {
 
 module.exports.edit = (req, res, next) => {
    const userEdited = { name, avatar, password } = req.body;
-
+  console.info(req.file)
    if(req.file) {
     userEdited.avatar = req.file.path
     }
-
-    if (req.user) {
-      Object.assign(req.user, userEdited)
-      req.user.save()
-          .then(user => res.status(200).json(user))
-          .catch(next) 
-    } else {
-      next(createError(400, 'You need to be logged'))
-    }
+   
+    Object.assign(req.user, userEdited)
+    req.user.save()
+        .then(user => res.status(200).json(user))
+        .catch(next) 
+  
 }
 
 module.exports.detail = (req, res, next) => {

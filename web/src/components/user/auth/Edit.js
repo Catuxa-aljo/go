@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import userService from '../../../services/user.service'
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext'
 
 const validations = {
     name: (value) => {
@@ -15,8 +16,7 @@ const validations = {
 
 function EditProfile({name, avatar, password}) {
 
-    const history = useHistory()
-
+    const auth = useContext(AuthContext)
     const [user, setUser] = useState({
         name: name,
         avatar: avatar,
@@ -29,7 +29,12 @@ function EditProfile({name, avatar, password}) {
     const [touched, setTouched] = useState({})
 
     function handleChange(event) {
-        const { name, value } = event.target
+        let { name, value, files } = event.target
+
+        if ( files ) {
+            value = files[0]
+        }
+
         setUser({ ...user,
         [name] : value})
         setErrors({
@@ -50,8 +55,7 @@ function EditProfile({name, avatar, password}) {
         event.preventDefault()
         userService.edit(user)
             .then(user => {
-                //setUser(user)
-                history.push('/me')
+                auth.login(user)
             })
 
     }
@@ -75,12 +79,11 @@ function EditProfile({name, avatar, password}) {
                     <div className="valid-feedback">{errors.name}</div>
                     <h6>{errors.email}</h6>    
                     <div className="input-group flex-nowrap">
-                        <span className="input-group-text" id="addon-wrapping"><i class="far fa-image"></i></span>
+                        <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
                         <input  name="avatar" 
                                 type="file" 
                                 className="form-control" 
                                 onChange={handleChange} 
-                                value={user.avatar} 
                                 placeholder="Add an avatar" 
                                 aria-label="Avatar" 
                                 aria-describedby="Add an avatar"/>

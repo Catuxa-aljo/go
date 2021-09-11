@@ -181,7 +181,7 @@ function Home () {
                     {touched.name && <h6><i className={errors.name ? "fas fa-exclamation-triangle" : "fas fa-check" }> {errors.name ? errors.name : 'All good!'}</i></h6>}
                     <div className="valid-feedback">{errors.name}</div>
                     <div className="input-group flex-nowrap">
-                        <span className="input-group-text" id="addon-wrapping"><i class="far fa-envelope"></i></span>
+                        <span className="input-group-text" id="addon-wrapping"><i className="far fa-envelope"></i></span>
                         <input  name="email" 
                                 type="text" 
                                 className="form-control" 
@@ -194,7 +194,7 @@ function Home () {
                     </div>
                     <h6>{errors.email}</h6>
                     <div className="input-group flex-nowrap">
-                        <span className="input-group-text" id="addon-wrapping"><i class="fas fa-unlock-alt"></i></span>
+                        <span className="input-group-text" id="addon-wrapping"><i className="fas fa-unlock-alt"></i></span>
                         <input  name="password" 
                                 type="password" 
                                 className="form-control" 
@@ -207,7 +207,7 @@ function Home () {
                     </div>
                     <h6>{errors.password}</h6>
                     <div className="input-group flex-nowrap">
-                        <span className="input-group-text" id="addon-wrapping"><i class="far fa-image"></i></span>
+                        <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
                         <input  name="avatar" 
                                 type="file" 
                                 className="form-control" 
