@@ -124,6 +124,34 @@ section h5 {
   padding-top:30% ;
   
 }
+
+.travel-resume {
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  text-align: left;
+  color: #fff;
+  margin: 0 2%;
+  padding: 3%;
+}
+
+.travel-resume h3{
+  font-size: 1rem;
+}
+
+.travel-resume h2{
+  font-size: 1.5rem;
+}
+
+.travel-resume img{
+  width: 100%;
+}
+
+.travel {
+  display: flex;
+  justify-content: space-between;
+  margin: 10% 0;
+}
+
+
 /* ///ANIMATIONS // */
 .tracking-in-expand {
 	-webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;

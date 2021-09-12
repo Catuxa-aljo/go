@@ -2,6 +2,33 @@ import { useEffect, useState } from 'react'
 import travelService from '../../../services/travel.service'
 import { useParams } from 'react-router-dom'
 
+const validations = {
+    title: (value) => {
+        let message;
+        if(!value) {
+            message = 'Your travel needs a title'
+        }
+        return message
+    },
+    startingDate: (value) => {
+        let message;
+        if(!value) {
+            message = 'Please insert a start date for your travel'
+        }
+        return message
+    },
+    endDate: (value) => {
+        let message;
+        if(!value) {
+            message = 'Please insert an ending date for your trip'
+        } 
+         else if(value < validations.startingDate.value ) {
+            message = 'Your ending date has to be after your starting date'
+        }
+        return message
+    }
+}
+
 
 function TravelEdit({title, description, participants, startingDate, endDate, cover, budget}) {
 
@@ -18,27 +45,63 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
     })
 
     const [ touched, setTouched ] = useState()
+    const [errors, setErrors] = useState({
+        title: validations.title('') ,
+        startingDate: validations.startingDate(''),
+        endDate: validations.endDate('')
+    })
 
-    function handleChange(event) {
-        const { name, value } = event.target;
+    function handleChange (event) {
+        let { name, value, files } = event.target;
+
+        if ( files ) {
+            value = files[0]
+        }
+
         setTravel({
             ...travel,
-            [name] : value
+            [name]: value
+        })
+        setErrors({
+            ...errors,
+            [name] : validations[name] ? validations[name](value) : undefined
+        })
+    }
+
+    function handleBlur(event) {
+        const { name } = event.target
+        setTouched({
+            ...touched,
+            [name]: true
         })
     }
 
     function handleSubmit(e) {
         e.preventDefault()
         travelService.edit(id, travel)
-            .then(travel => travelService.detail(travel.id))  
+            .then(travel => travelService.detail(travel.id))
+            .catch(error  => {
+                const { errors, message} = error.response?.data || error;
+                const touched =  Object.keys(errors || {}).reduce((touched, key) => {
+                    touched[key] = true;
+                    return touched;
+                }, {});           
+                setErrors({...errors,
+                        title : errors ? undefined : message,
+                        startingDate : errors ? undefined : message,
+                        endDate : errors ? undefined : message,
+                })
+                setTouched({... touched,
+                        title: errors ? false : true,
+                        startingDate: errors ? false : true,
+                        endDate: errors ? false : true,
+                })
+            })
     }
 
 
     return(
-        <div className="container">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet viverra ante sed imperdiet. Duis interdum mauris lacus, nec ornare diam vehicula nec. Phasellus commodo metus sem, vel consectetur nisi feugiat malesuada. Duis porttitor mi nunc, commodo laoreet ipsum pretium sit amet. Etiam tempor risus in risus dictum, eget fringilla ante porta. Aliquam eget tellus ut risus consectetur tristique. In nec turpis at magna vulputate laoreet vel at nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse iaculis vestibulum tellus ut sollicitudin. Etiam nulla tortor, consequat non risus quis, vestibulum facilisis diam. Proin magna orci, volutpat sit amet risus tempus, cursus ultrices purus. Vestibulum sed enim congue dolor tristique euismod ut at sapien.
-
-Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse potenti. Nunc id varius sapien. Proin eget diam est. Phasellus a varius erat. Ut ornare, nunc bibendum faucibus tincidunt, tortor tellus tempus lacus, at tempus elit sapien eu purus. Sed elit nunc, tincidunt in metus condimentum, tincidunt dapibus neque. Nullam tempor dui ipsum. Etiam dolor elit, viverra vitae volutpat vel, tristique vitae ex. Vestibulum nunc tellus, lobortis eget luctus at, viverra a justo.</p>
+        <div>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
@@ -46,6 +109,7 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             type="text" 
                             className="form-control"
                             value={travel.title} 
+                            onBlur={handleBlur}
                             onChange={handleChange}
                             placeholder="Your name" 
                             aria-label="Name" 
@@ -55,7 +119,9 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                 <div className="form-floating">
                     <textarea 
                             name="description"
-                            className="form-control" 
+                            className="form-control"
+                            onBlur={handleBlur}
+                            onChange={handleChange} 
                             placeholder="Add your travel description" 
                             id="floatingTextarea2"
                             defaultValue={travel.description}>
@@ -69,6 +135,7 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             type="date" 
                             className="form-control"
                             value={travel.startingDate} 
+                            onBlur={handleBlur}
                             onChange={handleChange}
                             placeholder="When does your travel starts?" 
                             aria-label="startingDate" 
@@ -81,6 +148,7 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             type="date" 
                             className="form-control"
                             value={travel.endDate}
+                            onBlur={handleBlur}
                             onChange={handleChange}
                             placeholder="When does your travel ends?" 
                             aria-label="endDate" 
@@ -92,6 +160,7 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                     <input  name="cover" 
                             type="file" 
                             className="form-control" 
+                            onChange={handleChange}
                             placeholder="Add a cover for your travel" 
                             aria-label="Cover" 
                             aria-describedby="Add a cover for your travel"/>
@@ -102,12 +171,14 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                             type="number" 
                             className="form-control"
                             value={travel.budget}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
                             placeholder="Do you wanna set an initial budget?" 
                             aria-label="budget" 
                             aria-describedby="Do you wanna set an initial budget?"/>
                 </div>
 
-                <button type="submit"> Create a new travel </button>
+                <button type="submit"> Save Travel </button>
             </form>
 
         </div>

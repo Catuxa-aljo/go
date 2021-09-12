@@ -189,7 +189,8 @@ function EventNew(props) {
                         className="form-check-input" 
                         type="checkbox" 
                         value={event.status}
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         id="flexCheckDefault"/>
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status

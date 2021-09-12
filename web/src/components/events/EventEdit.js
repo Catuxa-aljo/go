@@ -91,7 +91,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
 
     function handleSubmit(e) {
         e.preventDefault()
-        if ( isFormValid() ) {
+      
             eventService.edit(id, event)
                 .then(event => eventService.detail(event.id)) 
                 .catch(error  => {
@@ -111,7 +111,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                             endDate: errors ? false : true,
                     })
                 })
-        }   
+        
     }
 
 
@@ -219,7 +219,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                     Status
                 </label>
             </div>
-            <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()}> Create a new travel </button>
+            <button type="submit" className="btn btn-outline-secondary"> Create a new travel </button>
             </form>
            
         </div>
