@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react"
+
 function Budget ({budget, events, participants}) {
+
+    const [ isLoading, setIsLoading ] = useState(true)
+    useEffect(() => {
+      setIsLoading(false)
+    }, [])
+
     return(
       <>
+        {!isLoading && 
+        <>
         <table className="slide-in-left">
         <thead>
         <tr>
@@ -20,7 +30,19 @@ function Budget ({budget, events, participants}) {
 
       <h5>Make counts simple!</h5>
       {(budget - events.reduce((acc, event) => acc + event.price, 0)) / participants.length }€ for participant
+      </>}
+      {isLoading && 
+            <div className="loading">
+                <div className="spinner-border text-info" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
+
+
       </>
+
+
     )
 }
 

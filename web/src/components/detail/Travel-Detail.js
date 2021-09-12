@@ -1,8 +1,7 @@
 import travelService from "../../services/travel.service";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import Budget from "./Travel-Budget";
-import Events from "../events/Events";
 import Timeline from "../timeline/TimeLine";
 import { VerticalTimeline }  from 'react-vertical-timeline-component';
 import NewCalendar from "../calendar/NewCalendar";
@@ -10,7 +9,8 @@ import Moment from "react-moment";
 import TravelEdit from "../travels/list/Travel-Edit";
 import { useParams, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
-
+import EventResume from "./Events-Resume";
+//import App from "../map/Map";
 
 
 function TravelDetail(props) {
@@ -21,6 +21,7 @@ function TravelDetail(props) {
   const auth = useContext(AuthContext)
   const [visible, setVisibility] = useState(true)
   const [formVisibility, setFormVisibility] = useState(false)
+
 
   useEffect(() => {
     travelService
@@ -42,6 +43,7 @@ function TravelDetail(props) {
     setVisibility(false)
   }
 
+ 
   return (
     <div className="container">
       {!loading &&      
@@ -52,45 +54,45 @@ function TravelDetail(props) {
           <h3><i className="far fa-calendar-alt"></i> From <Moment format="YYYY/MM/DD">{travel.startingDate}</Moment> to <Moment format="YYYY/MM/DD">{travel.endDate}</Moment></h3>
           <h2><i className="far fa-compass"></i> {travel.description}</h2>
           <h3><i className="far fa-user"></i> {travel.participants}</h3>          
-          {auth.user.id === travel.user.id && 
+          {auth?.user?.id === travel.user.id && 
             <div className="d-flex">
             <h3><i className="far fa-trash-alt" role="button" onClick={handleDelete} title="delete travel"></i></h3>
-            <h3><i class="far fa-edit" role="button" onClick={handleEdit} title="edit travel"></i> </h3>
+            <h3><i className="far fa-edit" role="button" onClick={handleEdit} title="edit travel"></i> </h3>
             </div>
           } 
           {formVisibility && 
-          <TravelEdit {...travel} />}       
+          <TravelEdit {...travel} upDate={setTravel}/>}       
         </div>
 
-        <div className="col col-lg-8">  
-        <div>
-        <ul>
-          <li><Events events={travel.events} searchCategory='Plane' /></li>
-          <li><Events events={travel.events} searchCategory='Bookings' /></li>
-          <li><Events events={travel.events} searchCategory='Rentals' /></li>
-          <li><Events events={travel.events} searchCategory='Tickets' /></li>
-          <li><Events events={travel.events} searchCategory='RestaurantsBookings' /></li>
-          <li><Events events={travel.events} searchCategory='Transport' /></li>
-          <li><Events events={travel.events} searchCategory='Exchanges' /></li>
-          <li><Events events={travel.events} searchCategory='TravelInsurance' /></li>
-          <li><Events events={travel.events} searchCategory='Lugage' /></li>
-          <li><Events events={travel.events} searchCategory='Others' /></li>
-        </ul>     
+              <div className="col col-lg-8"> 
+              <div className="numbers">
+                <a href="#slide-1">1</a>
+                <h2> &gt; </h2>
+                <a href="#slide-2">2</a>
+                <h2> &gt; </h2>
+                <a href="#slide-3">3</a>
+              </div>
+              <div class="slides">
+                <div id="slide-1">
+                <EventResume {...travel } />
+                </div>
+                <div id="slide-2">
+                <VerticalTimeline>
+                {travel.events.sort((a, b) => a.startDate.localeCompare(b.startDate)).map(event => <Timeline key={event.id} {...event} />)}
+                </VerticalTimeline>
+                </div>
+                <div id="slide-3">
+                <NewCalendar {...travel} />
+                </div>
+              </div>
+            
         
-                 
-        </div>
-        <NewCalendar {...travel} />
-        <VerticalTimeline>
-        {travel.events.map(event => <Timeline key={event.id} {...event} />)}
-        </VerticalTimeline>
-     
-        <NavLink to={`/my-travels/${travel.id}/events`}>
-          <img src="./assets/img/go-voyager" />
-          <h3>EVENTOS</h3>
-        </NavLink>
+        
+        
+    
       </div>
       <div className="col col-lg-1">
-      <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-piggy-bank"></i> BUDGET</button>
+      <button className="budget btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i className="fas fa-piggy-bank"></i> BUDGET</button>
       <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
           <h5 id="offcanvasRightLabel"><i className="fas fa-piggy-bank"></i> BUDGET</h5>
@@ -101,12 +103,16 @@ function TravelDetail(props) {
         </div>
       </div>
       </div>
-      
       </div>
-     
       }
 
-      {loading && <div>Loading....</div>}
+      {loading && 
+        <div className="loading">
+            <div className="spinner-border text-info" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+      }
     </div>
   );
 }

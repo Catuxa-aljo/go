@@ -1,9 +1,10 @@
 
 import Register from "../user/auth/Register"
+import { useContext } from "react"
+import { AuthContext } from '../../contexts/AuthContext'
 
-
-function Home () {
-    
+function Home () {  
+    const auth = useContext(AuthContext)  
     return(
         <>
         <div className="home" id="home">
@@ -67,13 +68,13 @@ function Home () {
             <section>
                 <a href="#register" >Register today</a>
             </section>
-            <section id="register">
+           {!auth?.user && <section id="register">
                 <div>
                     <h2>Register and start the journey!</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus, velit quis maximus scelerisque, erat velit condimentum arcu, sed cursus nulla erat a elit. Nullam a ultricies est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere ante ex, non pellentesque massa aliquet gravida. Vestibulum placerat mi tortor, eget imperdiet nulla gravida eu. Integer facilisis nulla nec vehicula tincidunt. Nunc eget ex ullamcorper, dapibus quam a, mattis lectus. Maecenas ultrices tempor iaculis. Etiam vestibulum ut ante sed fermentum. In aliquet nibh ac nibh molestie tempus. Morbi non justo tellus. Phasellus blandit suscipit suscipit.</p>
                 </div>
                <Register />
-            </section>
+            </section>}
         </div>
         </>
     )

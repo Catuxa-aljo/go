@@ -40,12 +40,12 @@ function TravelList (props) {
     return(
         <>
         {isLoading && 
-        <div className="loading">
-            <div className="spinner-border text-info" role="status">
-                <span className="visually-hidden">Loading...</span>
+            <div className="loading">
+                <div className="spinner-border text-info" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </div>
-            </div>
-            }
+        }
         {!isLoading && 
         <div>
         <h1>Get inspired by the community</h1>

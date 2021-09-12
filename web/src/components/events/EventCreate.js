@@ -51,6 +51,8 @@ function EventNew(props) {
 
     const [touched, setTouched] = useState()
 
+    const [checkBox, setCheckBox] = useState(false)
+
     function handleChange(e) {
         const { name, value } = e.target;
         setEvent({ ...event,
@@ -65,6 +67,10 @@ function EventNew(props) {
         const { name } = e.target;
         setTouched({ ...touched,
             [name]: true})
+    }
+
+    function handleCheck() {        
+        setCheckBox(!checkBox)        
     }
 
     function isFormValid() {        
@@ -188,9 +194,10 @@ function EventNew(props) {
                 <input  name="status" 
                         className="form-check-input" 
                         type="checkbox" 
-                        value={event.status}
+                        value={checkBox}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        onClick={handleCheck}
                         id="flexCheckDefault"/>
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status

@@ -8,6 +8,7 @@ function EventDetail(props) {
     const history = useHistory()
     const [event, setEvent] = useState(null)
     const [ isLoading, setIsLoading ] = useState(true)
+  
 
     useEffect(() => {
         const id = props.match?.params?.id;
@@ -32,6 +33,13 @@ function EventDetail(props) {
             <i className="far fa-trash-alt" role="button" ></i>            
             <EventEdit {...event} />
         </div>}
+        {isLoading && 
+            <div className="loading">
+                <div className="spinner-border text-info" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
         </>
     )
 }
