@@ -2,6 +2,29 @@ import { useEffect, useState } from "react";
 import eventService from '../../services/events.service'
 import { useParams } from 'react-router-dom'
 
+const validations = {
+    name: (value) => {
+        let message
+        if (!value) {
+            message = 'Please, insert a title'
+        }
+        return message
+    },
+    startDate: (value) => {
+        let message
+        if (!value) {
+            message = 'Insert a star Date'
+        }
+        return message
+    },
+    endDate: (value) => {
+        let message
+        if (!value) {
+            message = 'Insert an end date'
+        }
+    }
+}
+
 function EventEdit ({name, description, url, startDate, endDate, time, price, status, location}) {
 
     const { id } = useParams()
@@ -32,23 +55,69 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
         })
     }, [])
 
+    const [checkBox, setCheckBox] = useState( event.status )
+
+    const [errors, setErrors] = useState({
+        name: validations.name(''),
+        startDate: validations.startDate(''),
+        endDate: validations.endDate('')
+    })
+
+    const [touched, setTouched] = useState()
+
     function handleChange(e) {
-        const { name, value } = e.target
-        setEvent({
-            ...event,
-            [name] : value
+        const { name, value } = e.target;
+        setEvent({ ...event,
+            [name]: value})
+        setErrors({
+            ...errors,
+            [name] : validations[name] ? validations[name](value) : undefined
         })
+    }
+
+    function handleBlur(e) {
+        const { name } = e.target;
+        setTouched({ ...touched,
+            [name]: true})
+    }
+
+    function handleCheck() {        
+        setCheckBox(!checkBox)        
+    }
+
+    function isFormValid() {        
+        return !Object.keys(errors).some(key => errors[key] !== undefined)
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        eventService.edit(id, event)
-            .then(event => eventService.detail(id))    
+        if ( isFormValid() ) {
+            eventService.edit(id, event)
+                .then(event => eventService.detail(event.id)) 
+                .catch(error  => {
+                    const { errors, message} = error.response?.data || error;
+                    const touched =  Object.keys(errors || {}).reduce((touched, key) => {
+                        touched[key] = true;
+                        return touched;
+                    }, {});           
+                    setErrors({...errors,
+                            title : errors ? undefined : message,
+                            startingDate : errors ? undefined : message,
+                            endDate : errors ? undefined : message,
+                    })
+                    setTouched({... touched,
+                            title: errors ? false : true,
+                            startingDate: errors ? false : true,
+                            endDate: errors ? false : true,
+                    })
+                })
+        }   
     }
+
+
 
     return(
         <div>
-            {console.log(id)}
             <form onSubmit={handleSubmit}>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
@@ -57,6 +126,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-control"
                         value={event.name} 
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Your event title" 
                         aria-label="Name" 
                         aria-describedby="Your event title"/>
@@ -67,6 +137,8 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-control" 
                         placeholder="Add your travel description" 
                         id="floatingTextarea2"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         defaultValue={event.description}>
                             
                 </textarea>
@@ -79,17 +151,19 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-control"
                         value={event.url}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Add an url" 
                         aria-label="Name" 
                         aria-describedby="Add an url"/>
             </div>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
-                <input  name="startingDate" 
+                <input  name="startDate" 
                         type="date" 
                         className="form-control"
                         value={event.startDate}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="When does your travel starts?" 
                         aria-label="startingDate" 
                         aria-describedby="When does your travel starts?"/>
@@ -102,6 +176,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-control"
                         value={event.endDate}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="When does your travel ends?" 
                         aria-label="endDate" 
                         aria-describedby="When does your travel ends?"/>
@@ -113,6 +188,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-control"
                         value={event.time}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="When does your travel ends?" 
                         aria-label="endDate" 
                         aria-describedby="When does your travel ends?"/>
@@ -122,6 +198,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                 <input  name="price" 
                         type="number" 
                         className="form-control"
+                        checked={checkBox}
                         value={event.price}
                         onChange={handleChange}
                         placeholder="When does your travel ends?" 
@@ -132,14 +209,17 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                 <input  name="status" 
                         className="form-check-input" 
                         type="checkbox" 
-                        value={true}
+                        value={checkBox}
+                        onClick={handleCheck}
                         onChange={handleChange}
-                        id="flexCheckDefault"/>
+                        id="flexCheckDefault"
+                        
+                        />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status
                 </label>
             </div>
-            <button type="submit"> Create a new travel </button>
+            <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()}> Create a new travel </button>
             </form>
            
         </div>

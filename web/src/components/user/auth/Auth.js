@@ -57,8 +57,14 @@ function Login () {
         })
     }
 
+    function isFormValid() {        
+        return !Object.keys(errors).some(key => errors[key] !== undefined)
+    }
+
     function handleSubmit(event) {
         event.preventDefault()
+
+        if ( isFormValid() ) {
         userService.login(data.email, data.password)
             .then(user => {
                 auth.login(user);
@@ -79,6 +85,7 @@ function Login () {
                         password: errors ? false : true,
                 })
             })
+        }
     }
 
     return(
@@ -113,7 +120,7 @@ function Login () {
                         aria-label="Name" 
                         aria-describedby="Add your name"/>
                 </div>
-                <button type="submit">LOGIN</button>
+                <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()} >LOGIN</button>
             </form>
 
         </div>

@@ -38,7 +38,7 @@ module.exports.logout = (req,res, next) => {
 
 module.exports.edit = (req, res, next) => {
    const userEdited = { name, avatar, password } = req.body;
-  console.info(req.file)
+  
    if(req.file) {
     userEdited.avatar = req.file.path
     }

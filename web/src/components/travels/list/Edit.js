@@ -22,28 +22,23 @@ function EditProfile({name, avatar, password}) {
         avatar: '',
     })
 
-    useEffect(() => {
-        setUser({
-            name: name,
-            avatar: avatar
-        }) 
-    },[])
-
     const [errors, setErrors] = useState({ 
         name: validations.name(''),
     });
 
     const [touched, setTouched] = useState({})
 
-    function handleChange(event) {
-        let { name, value, files } = event.target
+    function handleChange (event) {
+        let { name, value, files } = event.target;
 
         if ( files ) {
             value = files[0]
         }
 
-        setUser({ ...user,
-        [name] : value})
+        setTravel({
+            ...travel,
+            [name]: value
+        })
         setErrors({
             ...errors,
             [name] : validations[name] ? validations[name](value) : undefined
@@ -58,34 +53,12 @@ function EditProfile({name, avatar, password}) {
         })
     }
 
-    function isFormValid() {        
-        return !Object.keys(errors).some(key => errors[key] !== undefined)
-    }
-
     function handleSubmit(event) {
         event.preventDefault()
         userService.edit(user)
             .then(user => {
                 auth.login(user)
             })
-            .catch(error  => {
-                const { errors, message} = error.response?.data || error;
-                const touched =  Object.keys(errors || {}).reduce((touched, key) => {
-                    touched[key] = true;
-                    return touched;
-                }, {});
-
-                this.setState({
-                    errors: {
-                        url: errors ? undefined : message,
-                        ...errors,
-                    },
-                    touched: {
-                        url: errors ? false : true,
-                        ...touched,
-                    }
-                })
-            })  
 
     }
 
@@ -117,7 +90,7 @@ function EditProfile({name, avatar, password}) {
                                 aria-label="Avatar" 
                                 aria-describedby="Add an avatar"/>
                     </div>
-                    <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()}>Register</button>
+                    <button type="submit">Register</button>
                 
                 </form>
 

@@ -4,8 +4,6 @@ module.exports.create = (req, res, next) => {
     const data = {
         title: req.body.title || req.travel.title
     }
-   console.log(data)
-   console.log({...data, travel: req.params.id, pictures: req?.file?.path})
     Album.create ({...data, travel: req.params.id, pictures: req?.file?.path})
         .then(album => res.json(album))
 

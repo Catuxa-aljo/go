@@ -4,7 +4,7 @@ const Travel = require('../models/travel.model');
 
 module.exports.create = (req, res, next) => {
     const travel = {name, category, description, startDate, endDate, price} = req.body;
-    console.info(req.body)
+    
     TravelEvent.create ({...travel, travel: req.params.id})
         .then(travel => {
             res.json(travel)

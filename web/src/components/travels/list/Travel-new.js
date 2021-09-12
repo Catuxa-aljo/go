@@ -52,7 +52,12 @@ function TravelNew() {
     const [touched, setTouched] = useState({})
 
     function handleChange (event) {
-        const { name, value } = event.target;
+        let { name, value, files } = event.target;
+
+        if ( files ) {
+            value = files[0]
+        }
+
         setTravel({
             ...travel,
             [name]: value
@@ -74,7 +79,9 @@ function TravelNew() {
     function handleSubmit (event) {
         event.preventDefault()
         travelService.create(travel)
-            .then(travel => history.push(`/my-travels/${travel.id}`) )
+            .then(travel => {
+                history.push(`/my-travels/${travel.id}`)} 
+                )
             .catch(error  => {
                 const { errors, message} = error.response?.data || error;
                 const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -155,7 +162,6 @@ Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse
                     <input  name="cover" 
                             type="file" 
                             onChange={handleChange}
-                            value={travel.cover}
                             className="form-control" 
                             placeholder="Add a cover for your travel" 
                             aria-label="Cover" 

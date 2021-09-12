@@ -22,10 +22,10 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    console.log('Hey!')
+    
     const data = { initial } = req.body
     Object.assign(req.budget, data)
-    console.log(req.budget, data)
+    
     req.budget.save()
         .then(budget => res.json(budget))
         .catch(next)

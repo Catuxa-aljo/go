@@ -4,14 +4,14 @@ import moment from 'moment'
 
 const localizer = momentLocalizer(moment)
 
-function Calendar (props) {
+function Calendar ({startingDate, endDate, events}) {
   return(
   <div>
     <Calendar
       localizer={localizer}
       events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
+      startAccessor={startingDate}
+      endAccessor={endDate}
       style={{ height: 500 }}
     />
   </div>

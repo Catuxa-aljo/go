@@ -3,6 +3,29 @@ import eventService from '../../services/events.service'
 import travelService from '../../services/travel.service'
 import { useHistory, useParams } from 'react-router-dom'
 
+const validations = {
+    name: (value) => {
+        let message
+        if (!value) {
+            message = 'Please, insert a title'
+        }
+        return message
+    },
+    startDate: (value) => {
+        let message
+        if (!value) {
+            message = 'Insert a star Date'
+        }
+        return message
+    },
+    endDate: (value) => {
+        let message
+        if (!value) {
+            message = 'Insert an end date'
+        }
+    }
+}
+
 function EventNew(props) {
     const history = useHistory()
     const { id } = useParams()
@@ -21,7 +44,9 @@ function EventNew(props) {
     });
 
     const [errors, setErrors] = useState({
-
+        name: validations.name(''),
+        startDate: validations.startDate(''),
+        endDate: validations.endDate('')
     })
 
     const [touched, setTouched] = useState()
@@ -30,6 +55,10 @@ function EventNew(props) {
         const { name, value } = e.target;
         setEvent({ ...event,
             [name]: value})
+        setErrors({
+            ...errors,
+            [name] : validations[name] ? validations[name](value) : undefined
+        })
     }
 
     function handleBlur(e) {
@@ -38,12 +67,33 @@ function EventNew(props) {
             [name]: true})
     }
 
+    function isFormValid() {        
+        return !Object.keys(errors).some(key => errors[key] !== undefined)
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
-
-        eventService.create(id, event)
+        if ( isFormValid ) {
+            eventService.create(id, event)
                 .then(event => travelService.detail(id))
-        
+                .catch(error  => {
+                    const { errors, message} = error.response?.data || error;
+                    const touched =  Object.keys(errors || {}).reduce((touched, key) => {
+                        touched[key] = true;
+                        return touched;
+                    }, {});           
+                    setErrors({...errors,
+                            title : errors ? undefined : message,
+                            startingDate : errors ? undefined : message,
+                            endDate : errors ? undefined : message,
+                    })
+                    setTouched({... touched,
+                            title: errors ? false : true,
+                            startingDate: errors ? false : true,
+                            endDate: errors ? false : true,
+                    })
+                })
+            }
     }
 
     return(
@@ -145,7 +195,7 @@ function EventNew(props) {
                     Status
                 </label>
             </div>
-            <button type="submit"> Create a new travel </button>
+            <button className="btn btn-outline-secondary" type="submit" disabled={!isFormValid()}> {`New item for ${props.category}`} </button>
             </form>
         </div>
     )

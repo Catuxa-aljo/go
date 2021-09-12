@@ -4,13 +4,13 @@ const createError = require('http-errors');
 
 module.exports.exists = (req, res, next) => {  
 const id = req.params.id;
-console.info(id)
+
 Travel.findById(id)
     .populate('user')
     .populate('events')
     .populate('albums')
     .then(travel => {
-        console.info(travel)
+        
         if(travel) {
             req.travel = travel;
             next()
