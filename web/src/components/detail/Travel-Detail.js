@@ -10,6 +10,7 @@ import TravelEdit from "../travels/list/Travel-Edit";
 import { useParams, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import EventResume from "./Events-Resume";
+import Map from "../calendar/Calendar";
 //import App from "../map/Map";
 
 
@@ -77,12 +78,13 @@ function TravelDetail(props) {
                 <EventResume {...travel } />
                 </div>
                 <div id="slide-2">
+                <Map events={travel.events} />
                 <VerticalTimeline>
                 {travel.events.sort((a, b) => a.startDate.localeCompare(b.startDate)).map(event => <Timeline key={event.id} {...event} />)}
                 </VerticalTimeline>
                 </div>
                 <div id="slide-3">
-                <NewCalendar {...travel} />
+                
                 </div>
               </div>
             

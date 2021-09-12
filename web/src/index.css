@@ -166,6 +166,14 @@ section h5 {
   margin-bottom: 5%;
 }
 
+.vertical-timeline-element-subtitle {
+  font-size: 1rem;
+}
+
+.item-checked, .item-checked a {
+  background-color: ghostwhite;
+  color: #ccc !important;
+}
 
 .listed-items {
   display: flex;

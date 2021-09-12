@@ -9,6 +9,7 @@ function TravelInsurance(props) {
     const auth = useContext(AuthContext)  
     const [visible, setVisibility] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [check, setCheck] = useState()
 
     useEffect(() => {
         setIsLoading(false)
@@ -31,10 +32,10 @@ function TravelInsurance(props) {
             <>  
          <ul className="list-group events-list">  
             {eventsInsurance.map(event => 
-               <li className="list-group-item" key={event.id}> <NavLink exact to={`/my-travels/events/${event.id}`}> {event.name}</NavLink>
+               <li className={event.status ? "list-group-item item-checked" : "list-group-item"} key={event.id} > <NavLink exact to={`/my-travels/events/${event.id}`}> {event.name}</NavLink>
                {auth?.user?.id === props.user.id &&
                <div>
-               <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" /> | <i className="far fa-trash-alt" role="button" onClick={handleDelete}></i>
+               <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" checked={event.status}/> | <i className="far fa-trash-alt" role="button" onClick={handleDelete}></i>
                </div>}</li>)
             }
             {auth?.user?.id === props.user.id &&

@@ -198,7 +198,6 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                 <input  name="price" 
                         type="number" 
                         className="form-control"
-                        checked={checkBox}
                         value={event.price}
                         onChange={handleChange}
                         placeholder="When does your travel ends?" 
@@ -210,6 +209,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-check-input" 
                         type="checkbox" 
                         value={checkBox}
+                        checked={checkBox}
                         onClick={handleCheck}
                         onChange={handleChange}
                         id="flexCheckDefault"

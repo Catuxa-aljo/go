@@ -1,21 +1,19 @@
+import Calendar from 'react-awesome-calendar';
 
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
 
-const localizer = momentLocalizer(moment)
 
-function Calendar ({startingDate, endDate, events}) {
+function Map (props) {
+
+
+ const events = props.events.map(event => ( event.from = event.startDate, event.to= event.endDate, event.title=event.name, event.color='#1ccb9e', event))
+
   return(
-  <div>
+    <div>
     <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor={startingDate}
-      endAccessor={endDate}
-      style={{ height: 500 }}
-    />
+                events={events}
+            />
   </div>
   )
 }
 
-export default Calendar
+export default Map

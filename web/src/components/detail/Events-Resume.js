@@ -31,6 +31,10 @@ function EventResume({events, user}) {
             <Events events={events} searchCategory='Tickets' user={user} />
           </article>
           <article className="icons">
+            <h3> SIGHTSEEINGS <i className="fas fa-camera"></i></h3>
+            <Events events={events} searchCategory='Sightseeings' user={user} />
+          </article>
+          <article className="icons">
             <h3> RESTAURANTS <i className="fas fa-utensils"></i></h3>
             <Events events={events} searchCategory='RestaurantsBookings' user={user} />
           </article>
