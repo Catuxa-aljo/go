@@ -1,17 +1,20 @@
 import Moment from 'react-moment';
+import { NavLink } from 'react-router-dom';
 
-function TravelItem ({id, title, cover, description, startingDate, events}) {
+function TravelItem ({title, cover, description, startingDate, endDate, user, participants, id}) {
     return (
-        <div className="card col-3">
-            <img src={cover} className="card-img-top" alt={title}/>
-            <div className="card-body">
-                <h3 className="card-title">{title}</h3>
-                <small className="text-muted"><Moment format="YYYY/MM/DD">{startingDate}</Moment></small>
-                <p className="card-text">{description}</p>
-                <a href={`/my-travels/${id}`} className="btn btn-primary">Go somewhere</a>
-            </div>
-            
-        </div>
-    )
+        <>
+			<figure className="effect-ruby">
+               
+				<img src={cover} alt={title}/>
+				<figcaption>
+                    <small>From <Moment format="YYYY/MM/DD">{startingDate}</Moment> to <Moment format="YYYY/MM/DD">{endDate}</Moment> </small>
+                    <h3 className="card-title">{title}</h3>                    
+                    <p className="card-text">{description}</p>
+                    <NavLink exact to={`/my-travels/${id}`} className="stretched-link">GO</NavLink>
+				</figcaption>			
+			</figure>		
+        </>
+   )
 }
 export default TravelItem

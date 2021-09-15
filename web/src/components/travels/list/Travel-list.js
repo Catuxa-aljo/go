@@ -1,21 +1,22 @@
 import TravelItem from "./Travel-item";
 import travelService from "../../../services/travel.service"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import TravelNew from "./Travel-new";
 import { useLocation } from 'react-router-dom'
+import {AuthContext} from '../../../contexts/AuthContext'
+
 
 function TravelList (props) {
-    const [travels, setTravels] = useState([]);
-    const [isLoading, setLoading] = useState(true)
+    const [ travels, setTravels ] = useState([]);
+    const [ isLoading, setLoading ] = useState(true)
+    const [ visibility, handleVisibility ] = useState(false)
+    const auth = useContext(AuthContext)
+
+    const visibilityForm = useCallback(() => handleVisibility(!visibility), [visibility])
 
     useEffect(() => {
- /*     const location = useLocation()
-        location.pathname ==='/travels'
-        ? */
         fetchTravels()
-/*         :
-        fetchMyTravels() */
-    }, [])
+    }, [visibility])
 
     function fetchTravels () {        
         travelService.list()
@@ -47,16 +48,27 @@ function TravelList (props) {
             </div>
         }
         {!isLoading && 
+        <>
+        {visibility &&
         <div>
-        <h1>Get inspired by the community</h1>
-        <p>it amet consequat erat. In ligula velit, dictum nec libero at, pulvinar consequat odio. Fusce rhoncus suscipit eros. Fusce rutrum lorem ante, et ultrices magna semper ut. Sed ut lorem in ipsum ullamcorper imperdiet.</p>
-        <div className="container row">
-            {travels.map(travel => 
-                <TravelItem key={travel.id} {...travel}/>
-            )}
+        <TravelNew onTravelUpdate={visibilityForm} />
         </div>
-        <TravelNew />
-        </div>        
+        } 
+        <div className="container under-modal">
+            <h1>Welcome {auth.name}</h1>
+            <h2>Start discovering the world! Take a look of your travels</h2>
+            <p>it amet consequat erat. In ligula velit, dictum nec libero at, pulvinar consequat odio. Fusce rhoncus suscipit eros. Fusce rutrum lorem ante, et ultrices magna semper ut. Sed ut lorem in ipsum ullamcorper imperdiet.</p>
+            <div>
+                <button onClick={visibilityForm}>Add a new travel</button>
+            </div>
+            <div className="grid">
+                {travels.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(travel => 
+                    <TravelItem key={travel.id} {...travel}/>
+                )}
+            </div>
+        </div>
+           
+         </> 
         }
         
         </>

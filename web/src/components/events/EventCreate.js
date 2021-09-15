@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import eventService from '../../services/events.service'
 import travelService from '../../services/travel.service'
 import { useHistory, useParams } from 'react-router-dom'
+import { useForm } from "react-hook-form";
+import Place from "../map/Places"
 
 const validations = {
     name: (value) => {
@@ -11,25 +13,13 @@ const validations = {
         }
         return message
     },
-    startDate: (value) => {
-        let message
-        if (!value) {
-            message = 'Insert a star Date'
-        }
-        return message
-    },
-    endDate: (value) => {
-        let message
-        if (!value) {
-            message = 'Insert an end date'
-        }
-    }
 }
 
 function EventNew(props) {
+    
     const history = useHistory()
     const { id } = useParams()
-
+    const [checkBox, setCheckBox] = useState(false)
     const [event, setEvent] = useState({
         name: '',
         description: '',
@@ -39,19 +29,16 @@ function EventNew(props) {
         endDate: '',
         time: '',
         price: 0,
-        status: false,
-   
+        status: checkBox
     });
+
+
 
     const [errors, setErrors] = useState({
         name: validations.name(''),
-        startDate: validations.startDate(''),
-        endDate: validations.endDate('')
     })
-
     const [touched, setTouched] = useState()
-
-    const [checkBox, setCheckBox] = useState(false)
+  
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -81,7 +68,8 @@ function EventNew(props) {
         e.preventDefault()
         if ( isFormValid ) {
             eventService.create(id, event)
-                .then(event => travelService.detail(id))
+                .then(event => {props.onEventUpdate();
+                                props.onFormSubmit()})
                 .catch(error  => {
                     const { errors, message} = error.response?.data || error;
                     const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -90,32 +78,34 @@ function EventNew(props) {
                     }, {});           
                     setErrors({...errors,
                             title : errors ? undefined : message,
-                            startingDate : errors ? undefined : message,
-                            endDate : errors ? undefined : message,
                     })
                     setTouched({... touched,
                             title: errors ? false : true,
-                            startingDate: errors ? false : true,
-                            endDate: errors ? false : true,
                     })
                 })
             }
     }
 
     return(
-        <div>
+        <div className="event-form">
+            <div className="red"><i class="fas fa-times-circle" role="button" onClick={props.onFormSubmit}></i></div>
             <form onSubmit={handleSubmit}>
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
                 <input  name="name" 
                         type="text" 
                         className="form-control"
                         value={event.name} 
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        placeholder="Your event title" 
+                        placeholder="Insert a name" 
                         aria-label="Name" 
-                        aria-describedby="Your event title"/>
+                        aria-describedby="Insert a name"/>
+            </div>
+            {event.category !== 'Lugage' && 
+            <>
+            <div className="m-5">
+            <Place />
             </div>
             <div className="form-floating">
                 <textarea 
@@ -130,7 +120,7 @@ function EventNew(props) {
                 <label htmlFor="floatingTextarea2">Description</label>
             </div>
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                <span className="input-group-text" id="addon-wrapping"><i className="fas fa-link"></i></span>
                 <input  name="url" 
                         type="text" 
                         className="form-control"
@@ -141,8 +131,9 @@ function EventNew(props) {
                         aria-label="Name" 
                         aria-describedby="Add an url"/>
             </div>
+            <div className="dates">
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                <span className="input-group-text" id="addon-wrapping"><i className="far fa-calendar-alt"></i></span>
                 <input  name="startDate" 
                         type="date" 
                         className="form-control"
@@ -155,7 +146,7 @@ function EventNew(props) {
             </div>
             
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                <span className="input-group-text" id="addon-wrapping"><i className="fa fa-calendar-alt"></i></span>
                 <input  name="endDate" 
                         type="date" 
                         className="form-control"
@@ -166,8 +157,11 @@ function EventNew(props) {
                         aria-label="endDate" 
                         aria-describedby="When does your travel ends?"/>
             </div>
+            </div>
+            <div className="dates">
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+               <h3>Event Time:</h3>
+                <span className="input-group-text" id="addon-wrapping"><i className="far fa-clock"></i></span>
                 <input  name="time" 
                         type="time" 
                         className="form-control"
@@ -179,7 +173,8 @@ function EventNew(props) {
                         aria-describedby="When does your travel ends?"/>
             </div>
             <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                <h3>Price</h3>
+                <span className="input-group-text" id="addon-wrapping"><i className="fas fa-coins"></i></span>
                 <input  name="price" 
                         type="number" 
                         className="form-control"
@@ -190,6 +185,9 @@ function EventNew(props) {
                         aria-label="endDate" 
                         aria-describedby="When does your travel ends?"/>
             </div>
+            </div>
+            </>
+            }
             <div className="form-check">
                 <input  name="status" 
                         className="form-check-input" 

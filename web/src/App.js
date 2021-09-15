@@ -8,7 +8,8 @@ import EventDetail from "./components/events/EventDetail";
 import Me from "./components/user/auth/Me";
 import Calendar from "react-calendar";
 import NewCalendar from "./components/calendar/NewCalendar";
-
+import Error from "./components/errors/Error";
+import './index.css';
 
 
 function App() {
@@ -24,8 +25,10 @@ function App() {
       <Route exact path="/my-travels/events/:id" component= { EventDetail } />
       <Route exact path="/my-travels/:id" component={ TravelDetail} />     
       <Route exact path="/login" component={ Login } />
+      <Route exact path="/404" component={ Error } />
+      <Route exact path="/403" component={ Error } />
 
-      <Redirect to="/" />
+    {/* <Redirect to="/" /> */}
     </Switch>
     </>
   );

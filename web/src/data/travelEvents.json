@@ -1,46 +1,63 @@
 {
     "Tickets": {
         "text": "Tickets",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-ticket-alt",
+        "bgcolor" : "linear-gradient(180deg, #0700b8 0%, #00ff88 100%)"
     },
     "TravelInsurance": {
         "text": "TravelInsurance",
-        "icon": "https://res.cloudinary.com/dxiij3zmj/image/upload/v1631294254/go/qhfv2be8ey3pqhlqctq7.png"
+        "icon": "fas fa-hand-holding-medical",
+        "bgcolor" : "linear-gradient(180deg, #f8ff00 0%, #3ad59f 100%)"
     },
     "Plane": {
         "text": "Plane tickets",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-plane",
+        "bgcolor" : "linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%)"
     },
     "Bookings": {
         "text": "Bookings",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-bed",
+        "bgcolor" : "linear-gradient(180deg, #1CB5E0 0%, #000851 100%)"
     },
     "RestaurantsBookings": {
         "text": "Restaurants Bookings",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-utensils",
+        "bgcolor" : "linear-gradient(180deg, #d53369 0%, #daae51 100%)"
     },
     "Rentals" : {
         "text": "Rentals",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-car",
+        "bgcolor" : "linear-gradient(180deg, #f8ff00 0%, #3ad59f 100%)"
     },
     "Lugage" : {
         "text": "Lugage",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-suitcase",
+        "bgcolor" : "linear-gradient(180deg, #fcff9e 0%, #c67700 100%)"
     },
     "Transport": {
         "text": "Transport",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-subway",
+        "bgcolor" : "linear-gradient(180deg, #9ebd13 0%, #008552 100%)"
+    },
+    "Museums": {
+        "text": "Museums",
+        "icon": "fas fa-landmark",
+        "bgcolor" : "linear-gradient(180deg, #9ebd13 0%, #008552 100%)"
     },
     "Sightseeings": {
-        "text": "Transport",
-        "icon": "fas fa-landmark"
+        "text": "Sightseeings",
+        "icon": "fas fa-camera",
+        "bgcolor" : "linear-gradient(180deg, #3F2B96 0%, #A8C0FF 100%)"
     },
     "Exchanges": {
         "text": "Exchanges",
-        "icon": "fas fa-landmark"
+        "icon": "fas fa-sync",
+        "bgcolor" : "linear-gradient(180deg, #FDBB2D 0%, #22C1C3 100%)"
     },
     "Others" : {
         "Others" : "Others",
-        "icon": "fas fa-landmark"
+        "icon": "far fa-bookmark",
+        "bgcolor" : "linear-gradient(180deg, #FDBB2D 0%, #3A1C71 100%)"
+
     }
 }

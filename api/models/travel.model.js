@@ -10,7 +10,7 @@ const travelSchema = new Schema ({
             type: String
         },
         participants: {
-            type: []
+            type: Number
         },
         startingDate: {
             type: String

@@ -9,6 +9,8 @@ function Map (props) {
 
   return(
     <div>
+      <h1>STEP 2: On Travel!</h1>
+      <h2>Congratulations, now you are on your way!</h2>
     <Calendar
                 events={events}
             />

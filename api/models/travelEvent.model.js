@@ -18,11 +18,9 @@ const travelEventschema = new Schema({
         },
         startDate: {
             type:String,
-            required: 'A starting date is required'
         },
         endDate: {
-            type:String,
-            required: 'An ending date is required'
+            type:String,    
         },
         time: {
             type:String,

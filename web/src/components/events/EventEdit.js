@@ -117,7 +117,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
 
 
     return(
-        <div>
+        <div className="event-form">
             <form onSubmit={handleSubmit}>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>

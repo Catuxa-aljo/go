@@ -23,20 +23,20 @@ const validations = {
             message = 'Please insert an ending date for your trip'
         } 
          else if(value < validations.startingDate.value ) {
-            message = 'Your ending date has to be after your starting date'
+            message = 'Your ending date has to be set after your starting date'
         }
         return message
     }
 }
 
-function TravelNew() {
+function TravelNew({ onTravelUpdate }) {
     const history = useHistory()
     const id = useParams()
 
     const [ travel, setTravel ] = useState({
         title: '',        
         description:'',
-        participants: [],
+        participants: 1,
         startingDate:'',
         endDate: '',
         cover:'',        
@@ -102,82 +102,114 @@ function TravelNew() {
     }
 
     return(
-        <div className="container">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet viverra ante sed imperdiet. Duis interdum mauris lacus, nec ornare diam vehicula nec. Phasellus commodo metus sem, vel consectetur nisi feugiat malesuada. Duis porttitor mi nunc, commodo laoreet ipsum pretium sit amet. Etiam tempor risus in risus dictum, eget fringilla ante porta. Aliquam eget tellus ut risus consectetur tristique. In nec turpis at magna vulputate laoreet vel at nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse iaculis vestibulum tellus ut sollicitudin. Etiam nulla tortor, consequat non risus quis, vestibulum facilisis diam. Proin magna orci, volutpat sit amet risus tempus, cursus ultrices purus. Vestibulum sed enim congue dolor tristique euismod ut at sapien.
-
-Sed nisi tellus, lacinia eget sem vehicula, malesuada feugiat augue. Suspendisse potenti. Nunc id varius sapien. Proin eget diam est. Phasellus a varius erat. Ut ornare, nunc bibendum faucibus tincidunt, tortor tellus tempus lacus, at tempus elit sapien eu purus. Sed elit nunc, tincidunt in metus condimentum, tincidunt dapibus neque. Nullam tempor dui ipsum. Etiam dolor elit, viverra vitae volutpat vel, tristique vitae ex. Vestibulum nunc tellus, lobortis eget luctus at, viverra a justo.</p>
+        <div className="container form-modal">
+            <div className="red"><i class="fas fa-times-circle" role="button" onClick={onTravelUpdate}></i></div>
+            <h1>Add a new travel </h1>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
                     <input  name="title" 
                             type="text" 
                             className="form-control"
                             value={travel.title} 
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            placeholder="Your name" 
+                            placeholder="Travel name" 
                             aria-label="Name" 
-                            aria-describedby="Add your name"/>
+                            aria-describedby="Add Travel name"/>
                 </div>
                 {touched.title && <div>{errors.title}</div>}
                 <div className="form-floating">
                     <textarea 
                             name="description"
+                            value={travel.description} 
+                            onChange={handleChange}
                             className="form-control" 
                             placeholder="Add your travel description" 
                             id="floatingTextarea2"
-                            defaultValue={travel.description}>
+                            >
                               
                     </textarea>
                     <label htmlFor="floatingTextarea2">Description</label>
                 </div>
-                <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
-                    <input  name="startingDate" 
-                            type="date" 
-                            className="form-control"
-                            value={travel.startingDate} 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            placeholder="When does your travel starts?" 
-                            aria-label="startingDate" 
-                            aria-describedby="When does your travel starts?"/>
+                <div>
+                    <h3>Upload a cover for your travel</h3>
+                    <div className="input-group flex-nowrap">
+                        <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
+                        <input  name="cover" 
+                                type="file" 
+                                onChange={handleChange}
+                                className="form-control" 
+                                placeholder="Add a cover for your travel" 
+                                aria-label="Cover" 
+                                aria-describedby="Add a cover for your travel"/>
+                    </div>
                 </div>
+                <div className="dates">
+                <div>
+                    <h3>Start Date</h3>
+                    <div className="input-group flex-nowrap">
+                        <span className="input-group-text" id="addon-wrapping"><i className="far fa-calendar-alt"></i></span>
+                        <input  name="startingDate" 
+                                type="date" 
+                                className="form-control"
+                                value={travel.startingDate} 
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="When does your travel starts?" 
+                                aria-label="startingDate" 
+                                aria-describedby="When does your travel starts?"/>
+                    </div>
                 {touched.startingDate && <div>{errors.startingDate}</div>}
-                <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
-                    <input  name="endDate" 
-                            type="date" 
-                            className="form-control"
-                            value={travel.endDate}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            placeholder="When does your travel ends?" 
-                            aria-label="endDate" 
-                            aria-describedby="When does your travel ends?"/>
                 </div>
-                {touched.endDate && <div>{errors.endDate}</div>}
-                <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
-                    <input  name="cover" 
-                            type="file" 
-                            onChange={handleChange}
-                            className="form-control" 
-                            placeholder="Add a cover for your travel" 
-                            aria-label="Cover" 
-                            aria-describedby="Add a cover for your travel"/>
+                <div>
+                    <h3>End Date</h3>
+                    <div className="input-group flex-nowrap">
+                        <span className="input-group-text" id="addon-wrapping"><i className="fas fa-calendar-alt"></i></span>
+                        <input  name="endDate" 
+                                type="date" 
+                                className="form-control"
+                                value={travel.endDate}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="When does your travel ends?" 
+                                aria-label="endDate" 
+                                aria-describedby="When does your travel ends?"/>
+                    </div>
+                    {touched.endDate && <div>{errors.endDate}</div>}
                 </div>
-                <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
-                    <input  name="budget" 
-                            type="number" 
-                            className="form-control"
-                            value={travel.budget}
-                            onChange={handleChange}
-                            placeholder="Do you wanna set an initial budget?" 
-                            aria-label="budget" 
-                            aria-describedby="Do you wanna set an initial budget?"/>
                 </div>
+                <div className="dates">
+                    <div>
+                        <h3>Do you wanna set an initial budget?</h3>
+                        <div className="input-group flex-nowrap">
+                            <span className="input-group-text" id="addon-wrapping"><i className="fas fa-coins"></i></span>
+                            <input  name="budget" 
+                                    type="number" 
+                                    className="form-control"
+                                    value={travel.budget}
+                                    onChange={handleChange}
+                                    placeholder="Do you wanna set an initial budget?" 
+                                    aria-label="budget" 
+                                    aria-describedby="Do you wanna set an initial budget?"/>
+                        </div>
+                    </div>
+                    <div>
+                    <h3>Number of participants</h3>
+                    <div className="input-group flex-nowrap">
+                        <span className="input-group-text" id="addon-wrapping"><i className="fas fa-users"></i></span>
+                        <input  name="participants" 
+                                type="number" 
+                                className="form-control"
+                                value={travel.participants}
+                                onChange={handleChange}
+                                placeholder="Number of participants" 
+                                aria-label="budget" 
+                                aria-describedby="Number of participants"/>
+                    </div>
+                </div>
+                </div>
+                
 
                 <button type="submit"> Create a new travel </button>
             </form>

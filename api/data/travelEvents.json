@@ -32,7 +32,11 @@
         "icon": "fas fa-landmark"
     },
     "Sightseeings": {
-        "text": "Transport",
+        "text": "Sightseeings",
+        "icon": "fas fa-landmark"
+    },
+    "Museums": {
+        "text": "Museums",
         "icon": "fas fa-landmark"
     },
     "Exchanges": {
