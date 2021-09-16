@@ -25,24 +25,11 @@ const validations = {
     }
 }
 
-function EventEdit ({name, description, url, startDate, endDate, time, price, status, location}) {
+function EventEdit ({name, description, url, startDate, endDate, time, price, status, location, onEventUpdate, onSubmitForm}) {
 
     const { id } = useParams()
-
+    
     const [event, setEvent ] = useState({
-        name: '',
-        description: '',
-        url: '',
-        startDate: '',
-        endDate: '',
-        time: '',
-        price: 0,
-        status: false,
-        location: []
-    }) 
-
-    useEffect(() => {
-        setEvent({
         name: name,
         description: description,
         url: url,
@@ -52,16 +39,16 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
         price: price,
         status: status,
         location: location
-        })
-    }, [])
-
-    const [checkBox, setCheckBox] = useState( event.status )
+    }) 
+    const [checkBox, setCheckBox] = useState(event.status)
 
     const [errors, setErrors] = useState({
         name: validations.name(''),
         startDate: validations.startDate(''),
         endDate: validations.endDate('')
     })
+
+    
 
     const [touched, setTouched] = useState()
 
@@ -81,8 +68,10 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
             [name]: true})
     }
 
-    function handleCheck() {        
-        setCheckBox(!checkBox)        
+    function handleCheck() { 
+        setCheckBox(!checkBox)      
+        console.log(checkBox)     
+           
     }
 
     function isFormValid() {        
@@ -93,7 +82,10 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
         e.preventDefault()
       
             eventService.edit(id, event)
-                .then(event => eventService.detail(event.id)) 
+                .then(event => {
+                        onSubmitForm();
+                        onEventUpdate()
+                }) 
                 .catch(error  => {
                     const { errors, message} = error.response?.data || error;
                     const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -119,6 +111,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
     return(
         <div className="event-form">
             <form onSubmit={handleSubmit}>
+            <div className="red"><i className="fas fa-times-circle" role="button" onClick={onSubmitForm}></i></div>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
                 <input  name="name" 
@@ -209,11 +202,10 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         className="form-check-input" 
                         type="checkbox" 
                         value={checkBox}
-                        checked={checkBox}
                         onClick={handleCheck}
                         onChange={handleChange}
+                        defaultChecked={checkBox}
                         id="flexCheckDefault"
-                        
                         />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status

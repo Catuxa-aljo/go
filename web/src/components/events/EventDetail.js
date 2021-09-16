@@ -1,27 +1,37 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import eventService from '../../services/events.service'
 import { NavLink, useHistory, useParams } from 'react-router-dom'
 import EventEdit from './EventEdit'
 import categories from '../../data/travelEvents.json'
+import ReviewCreate from '../Reviews/ReviewCreate'
 
 function EventDetail(props) {
 
     const history = useHistory()
     const [event, setEvent] = useState(null)
     const [ isLoading, setIsLoading ] = useState(true)
-    const [ visibility, setVisibility ] = useState(false)
-  
+
+    const [ visibility, handleVisibility ] = useState(false)
+    const visibilityForm = useCallback(() => handleVisibility(!visibility), [visibility])
+
+    const [fetch, handleFetch] = useState(false);
+    const fetchEvent = useCallback(() => handleFetch(!fetch), [fetch])
 
     useEffect(() => {
+        let isMounted = true;
         const id = props.match?.params?.id;
         eventService.detail(id)
             .then(event => {
+                if (isMounted) {
                 setEvent(event)
                 setIsLoading(false)
+            }
             })
-    }, [])
+            .catch((error) => console.error(error));
+        return () => isMounted = false
+    }, [fetch, visibility])
 
-    function handleCheck(id) {
+    function handleCheck() {
         setEvent({
             ...event,
             status : !event.status
@@ -33,9 +43,6 @@ function EventDetail(props) {
             .then(() => history.push(`/my-travels/${event.travel.id}`) )
     }
 
-    function handleVisibility() {
-        setVisibility(!visibility)
-    }
 
     return(
         <>
@@ -53,18 +60,22 @@ function EventDetail(props) {
                 <div>
                     <h3>{event.category}</h3>
                     <h1>{event.name}</h1>                    
-                    <a href={event.url}><i class="fas fa-external-link-alt"></i> {event.url}</a>
+                    <a href={event.url}><i className="fas fa-external-link-alt"></i> {event.url}</a>
                     <p>{event.description}</p>   
+                    {event.reviews.map(review => <h3>{review.comments}</h3>)}
                 </div>
                 <div className="event-resume">      
-                    <h3>Status: {event.status ? <i class="far fa-calendar-check"></i> : <i class="far fa-calendar"></i>} </h3>    
+                    <h3>Status: {event.status ? <i className="far fa-calendar-check"></i> : <i className="far fa-calendar"></i>} </h3>    
                     <h3>Cost: {event.price}</h3>
-                    <i class="fas fa-edit" role="button" onClick={handleVisibility} ></i>
-                    <i className="far fa-trash-alt" role="button" onClick={handleDelete} ></i>     
+                    <i className="fas fa-edit" role="button" onClick={handleVisibility} ></i>
+                    <i className="far fa-trash-alt" role="button" onClick={ () => handleDelete(event.id) } ></i>     
                 </div>
             </div> 
+            <div>
+                <ReviewCreate />
+            </div>
                  
-          {visibility && <EventEdit {...event} />}
+          {visibility && <EventEdit {...event} onEventUpdate={fetchEvent} onSubmitForm={visibilityForm}/>}
         </div>}
         {isLoading && 
             <div className="loading">

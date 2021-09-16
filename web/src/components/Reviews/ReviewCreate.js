@@ -1,8 +1,12 @@
 
 import { useEffect, useState } from 'react'
 import reviewService from '../../services/review.service'
+import {useParams} from 'react-router-dom'
+import Rating from 'react-rating'
 
 function ReviewCreate() {
+
+    const { id } = useParams()
 
     const [review, setReview] = useState({
 
@@ -19,12 +23,11 @@ function ReviewCreate() {
         })
     }
 
-    function handleSubmit (event) {
-        event.id.preventDefault()
-        reviewService.create(event.id)
-            .then(review => {
-               } 
-                )
+    function handleSubmit (event) {    
+
+        event.preventDefault()
+        reviewService.create(id, review)
+            .then(review => {} )
             .catch(error  => {
                 const { errors, message} = error.response?.data || error;
                 const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -36,7 +39,7 @@ function ReviewCreate() {
 
     return(
         <div>
-
+                
                 <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
@@ -49,6 +52,11 @@ function ReviewCreate() {
                             aria-label="Name" 
                             aria-describedby="Add Travel name"/>
                 </div>
+                <div>
+                <h3>Rating (quality)</h3>
+                <input name="stars" as={Rating} />
+                </div>
+                
                 <button type="submit"> Create a new travel </button>
                 </form>
 

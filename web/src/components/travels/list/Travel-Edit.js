@@ -30,7 +30,7 @@ const validations = {
 }
 
 
-function TravelEdit({title, description, participants, startingDate, endDate, cover, budget}, props) {
+function TravelEdit({title, description, participants, startingDate, endDate, cover, budget}) {
 
     const { id } = useParams()
 
@@ -80,8 +80,7 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
         e.preventDefault()
         travelService.edit(id, travel)
             .then(travel => {
-                props.setFormVisibility(false)
-                props.fetchTravels()
+               console.log(travel)
                 })
             .catch(error  => {
                 const { errors, message} = error.response?.data || error;

@@ -103,7 +103,7 @@ function TravelNew({ onTravelUpdate }) {
 
     return(
         <div className="container form-modal">
-            <div className="red"><i class="fas fa-times-circle" role="button" onClick={onTravelUpdate}></i></div>
+            <div className="red"><i className="fas fa-times-circle" role="button" onClick={onTravelUpdate}></i></div>
             <h1>Add a new travel </h1>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">

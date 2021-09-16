@@ -10,6 +10,7 @@ import Calendar from "react-calendar";
 import NewCalendar from "./components/calendar/NewCalendar";
 import Error from "./components/errors/Error";
 import './index.css';
+import './assets/css/styles.css';
 
 
 function App() {

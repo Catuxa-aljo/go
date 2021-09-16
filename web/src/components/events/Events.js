@@ -3,33 +3,43 @@ import { NavLink } from 'react-router-dom'
 import EventNew from "./EventCreate";
 import eventServices from '../../services/events.service'
 import { AuthContext } from '../../contexts/AuthContext'
+import eventService from '../../services/events.service'
 
 function Events(props) {
 
     const auth = useContext(AuthContext)  
-    const [isLoading, setIsLoading] = useState(true)
-    const [check, setCheck] = useState()
-    const [status, setValue] = useState()
+    const [isLoading, setIsLoading] = useState(true)      
     const [ visibility, handleVisibility ] = useState(false)
+    const [ checking, handleChecking ] = useState(false)
     const visibilityForm = useCallback(() => handleVisibility(!visibility), [visibility])
+    
 
     useEffect(() => {
         setIsLoading(false);
-        setValue(props.status)
-    },[visibility])
+    }, [visibility])
+
+    const [status, setValue] = useState(props.status)
 
     function handleChange(e) {
         const {name, value} = e.target;
         setValue({ [name]: value })
     }
-
+    
     function handleDelete(id) {
         eventServices.remove(id)
             .then( () => props.onEventUpdate() )
             .catch(error => console.error(error))
     }
 
-
+    function handleCheckEvent(id, event) {        
+        eventService.edit(id, {...event, status: !status})
+                .then(event =>{
+                    props.onEventUpdate() 
+                    setValue(!status)
+                })
+                .catch(error => console.error(error))
+    }
+   
     const eventsInsurance = props.events.filter(ev => ev.category == props.searchCategory); 
     return (
         <>
@@ -42,13 +52,13 @@ function Events(props) {
                     {auth?.user?.id === props.user.id &&
                     <div>
                         <input 
-                        className="form-check-input" 
-                        type="checkbox" 
-                        value={event.status} 
-                        id="defaultCheck1" 
-                        onChange={handleChange}
-                        //onClick={ () => handleCheck(event.id) }
-                        // {event.status ?  `checked` : '' }
+                            className="form-check-input" 
+                            type="checkbox" 
+                            value={status} 
+                            id="defaultCheck1" 
+                            onChange={handleChange}
+                            onClick={ () => handleCheckEvent(event.id, event)}
+                            defaultChecked={event.status}
                         />  
                         | <i className="far fa-trash-alt" 
                         role="button" 

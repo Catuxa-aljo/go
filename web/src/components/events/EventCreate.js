@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import eventService from '../../services/events.service'
 import travelService from '../../services/travel.service'
 import { useHistory, useParams } from 'react-router-dom'
-import { useForm } from "react-hook-form";
-import Place from "../map/Places"
+
 
 const validations = {
     name: (value) => {
@@ -29,9 +28,15 @@ function EventNew(props) {
         endDate: '',
         time: '',
         price: 0,
-        status: checkBox
+        
     });
 
+    useState(() => {
+        setEvent({
+            ...event,
+            status: checkBox
+        })
+    }, [])
 
 
     const [errors, setErrors] = useState({
@@ -56,7 +61,8 @@ function EventNew(props) {
             [name]: true})
     }
 
-    function handleCheck() {        
+    function handleCheck(e) {
+        console.log(e.target.value)        
         setCheckBox(!checkBox)        
     }
 
@@ -88,7 +94,7 @@ function EventNew(props) {
 
     return(
         <div className="event-form">
-            <div className="red"><i class="fas fa-times-circle" role="button" onClick={props.onFormSubmit}></i></div>
+            <div className="red"><i className="fas fa-times-circle" role="button" onClick={props.onFormSubmit}></i></div>
             <form onSubmit={handleSubmit}>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
@@ -104,9 +110,6 @@ function EventNew(props) {
             </div>
             {event.category !== 'Lugage' && 
             <>
-            <div className="m-5">
-            <Place />
-            </div>
             <div className="form-floating">
                 <textarea 
                         name="description"
@@ -195,7 +198,7 @@ function EventNew(props) {
                         value={checkBox}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        onClick={handleCheck}
+                        onClick={(e) => handleCheck(e)}
                         id="flexCheckDefault"/>
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status

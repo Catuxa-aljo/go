@@ -73,7 +73,7 @@ function TravelDetail(props) {
               </div>
             } 
             {formVisibility && 
-            <TravelEdit {...travel} upDate={setTravel} setFormVisibility={setFormVisibility} upDate={fetchTravels} />
+            <TravelEdit {...travel} />
             }
           </div>      
         </div>

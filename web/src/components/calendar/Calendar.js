@@ -1,11 +1,16 @@
 import Calendar from 'react-awesome-calendar';
-
+import data from '../../data/travelEvents.json'
 
 
 function Map (props) {
 
 
- const events = props.events.map(event => ( event.from = event.startDate, event.to= event.endDate, event.title=event.name, event.color='#1ccb9e', event))
+ const events = props.events.map(event => ( 
+   event.from = event.startDate, 
+   event.to= event.endDate, 
+   event.title=event.name,
+   event.color=data[event.category].color, 
+    event))
 
   return(
     <div>

@@ -1,9 +1,11 @@
 
 import { NavLink } from "react-router-dom"
 import ReviewCreate from "../Reviews/ReviewCreate"
+import reviewService from '../../services/review.service'
 import '../../index.css';
 
 function EventsReviews({events, user}) {
+
     return(
         <div>
             EVENTS
@@ -13,8 +15,9 @@ function EventsReviews({events, user}) {
                     <div>
                   <NavLink exact to={`/my-travels/events/${event.id}`}> {event.name} </NavLink>
                   <p className="mb-1">{event.reviews}</p>
-                 
+                  <ReviewCreate {...event} />
                   </div>
+                  {event.reviews && event.reviews.map(review => <p>{review}</p>)}
                   <span className="badge bg-primary rounded-pill">Add a review<i className="fas fa-star-half-alt"></i></span>
                 </li>
               </ul>
