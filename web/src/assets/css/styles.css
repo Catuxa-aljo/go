@@ -45,7 +45,7 @@
   }
 
   p {
-      font-size: 0.9rem;
+      font-size: 1rem;
   }
 
   #register input > .bg-danger input{
@@ -56,6 +56,15 @@
   .container {
     padding-top: 5%;
   }
+
+  .form-control.is-invalid, .was-validated .form-control:invalid input{
+    background: transparent;
+    background-color: rgb(233, 198, 198) !important
+  }
   
+  h6 {
+    font-family:'open_sanssemibold';
+    font-size: 0.8rem;
+  }
   
   

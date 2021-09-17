@@ -50,7 +50,7 @@ header{
   max-width: 400px;
 }
 
-.home a, button{
+.home a, button, .blue a{
   background-color: indianred !important;
   color: #fff !important;
   font-size: 1rem;
@@ -66,7 +66,7 @@ header{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.home a:hover, button:hover {
+.home a:hover, button:hover, .blue a:hover {
   background-color: crimson !important;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0);
 }
@@ -79,6 +79,7 @@ h1 {
   width: 100%;
   max-width: 300px;
 }
+
 
 .slides h2 {
   color: #00C9FF;
@@ -104,8 +105,10 @@ article > .numbers {
 }
 
 section {
-  padding: 5%;
+  padding: 2%;
   display: flex;
+  align-content: space-around;
+  justify-content: center;
 
 }
 
@@ -124,6 +127,10 @@ section h5 {
   font-size: 0.8rem;
 }
 
+article {
+  padding: 2%;
+}
+
 #register {
   flex-direction: column;
 }
@@ -131,6 +138,12 @@ section h5 {
 #register input {
   background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
   color: #fff;
+}
+
+.form-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .input-group {

@@ -114,13 +114,14 @@ function Register() {
                     aria-label="Name" 
                     aria-describedby="Add your name"/>
         </div>
-        {touched.name && <h6><i className={errors.name ? "fas fa-exclamation-triangle" : "fas fa-check" }> {errors.name ? errors.name : 'All good!'}</i></h6>}
-        <div className="valid-feedback">{errors.name}</div>
+        
+        {touched.name && <h6><i className={errors.name ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.name ? errors.name : 'All good!'}</h6>}
+        
         <div className="input-group flex-nowrap">
             <span className="input-group-text" id="addon-wrapping"><i className="far fa-envelope"></i></span>
             <input  name="email" 
                     type="text" 
-                    className="form-control" 
+                    className={`form-control ${touched.email && `${errors.email  ? 'bg-danger is-invalid' : 'is-valid'}`}`} 
                     onChange={handleChange} 
                     onBlur={handleBlur}
                     value={user.email} 
@@ -128,12 +129,13 @@ function Register() {
                     aria-label="Email" 
                     aria-describedby="Add your email"/>
         </div>
-        <h6>{errors.email}</h6>
+        {touched.email && <h6><i className={errors.email ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.email ? errors.email : 'All good!'}</h6>}
+
         <div className="input-group flex-nowrap">
             <span className="input-group-text" id="addon-wrapping"><i className="fas fa-unlock-alt"></i></span>
             <input  name="password" 
                     type="password" 
-                    className="form-control" 
+                    className={`form-control ${touched.password && `${errors.password  ? 'bg-danger is-invalid' : 'is-valid'}`}`}
                     onChange={handleChange} 
                     onBlur={handleBlur}
                     value={user.password} 
@@ -141,7 +143,9 @@ function Register() {
                     aria-label="Password"
                     aria-describedby="Choose your password"/>
         </div>
-        <h6>{errors.password}</h6>
+        
+        {touched.password && <h6><i classpassword={errors.password ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.password ? errors.password : 'All good!'}</h6>}
+
         <div className="input-group flex-nowrap">
             <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>
             <input  name="avatar" 
@@ -152,7 +156,9 @@ function Register() {
                     aria-label="Avatar" 
                     aria-describedby="Add an avatar"/>
         </div>
-        <button className="btn btn-outline-secondary" type="submit" disabled={!isFormValid()}>Register</button>
+        <div className="form-button">
+            <button className="btn btn-outline-secondary" type="submit" disabled={!isFormValid()}>Register</button>
+        </div>
     
     </form>
 

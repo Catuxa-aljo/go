@@ -16,6 +16,7 @@ const validations = {
         if(!value) {
             message= 'Insert your password'
         }
+        return message
     }
 }
 
@@ -89,7 +90,8 @@ function Login () {
     }
 
     return(
-        <div className="container">
+        <div className="home">
+            <div className="container">
             <h1>Login</h1>
             <p>Lorem fistrum a gramenawer por la gloria de mi madre pupita al ataquerl llevame al sircoo la caidita. Jarl está la cosa muy malar a gramenawer a peich no te digo trigo por no llamarte Rodrigor no puedor diodenoo caballo blanco caballo negroorl apetecan. Apetecan no te digo trigo por no llamarte Rodrigor a peich tiene musho peligro quietooor qué dise usteer amatomaa sexuarl mamaar se calle ustée por la gloria de mi madre. Está la cosa muy malar no puedor jarl hasta luego Lucas no puedor me cago en tus muelas benemeritaar mamaar ese pedazo de a wan quietooor. No puedor no te digo trigo por no llamarte Rodrigor mamaar caballo blanco caballo negroorl pupita fistro la caidita hasta luego Lucas amatomaa. Qué dise usteer sexuarl de la pradera pecador.</p>
             <form onSubmit={handleSubmit}>
@@ -101,12 +103,13 @@ function Login () {
                         value={data.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="form-control" 
+                        className={`form-control ${touched.email && `${errors.email  ? 'bg-danger is-invalid' : 'is-valid'}`}`}
                         placeholder="Your name"
                         aria-label="Name" 
                         aria-describedby="Add your name"/>
-                    {touched.email && errors.email}
                 </div>
+                {touched.email && <h6><i className={errors.email ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.email ? errors.email : 'All good!'}</h6>}
+
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
                     <input 
@@ -115,14 +118,16 @@ function Login () {
                         value={data.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="form-control" 
-                        placeholder="Your name" 
-                        aria-label="Name" 
-                        aria-describedby="Add your name"/>
+                        className={`form-control ${touched.password && `${errors.password  ? 'bg-danger is-invalid' : 'is-valid'}`}`}
+                        placeholder="Password" 
+                        aria-label="Password" 
+                        aria-describedby="write your password"/>
                 </div>
+                {touched.password && <h6><i className={errors.password ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.password ? errors.password : 'All good!'}</h6>}
+
                 <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()} >LOGIN</button>
             </form>
-
+            </div>
         </div>
     )
 }
