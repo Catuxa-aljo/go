@@ -11,6 +11,7 @@ require('./config/db.config');
 const cors = require('./config/cors.config')
 
 const app = express();
+app.use(express.static(`${__dirname}/react-app`))
 
 app.use(logger('dev'));
 const {sessionConfig} = require('./config/session.config')
@@ -23,10 +24,12 @@ app.use(express.json());
 
 const routes = require('./config/routes.config');
 app.use('/api', routes);
+app.use('/*', (req, res) => {
+  res.sendFile(`${__dirname}/react-app/index.html`)
+})
 
 
 
-app.use((req, res, next) => next(createError(404, 'Route not found')))
 
 app.use((error, req, res, next) => {
   if (error instanceof mongoose.Error.ValidationError) {

@@ -59,7 +59,7 @@ const travelEventschema = new Schema({
                 ret.id = doc.id;
                 delete ret._id;
                 delete ret.__v;
-                delete ret.password;
+                ret.location = doc.location.coordinates.reverse()
 
                 return ret
                 }

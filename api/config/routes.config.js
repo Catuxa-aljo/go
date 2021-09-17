@@ -1,4 +1,5 @@
 const express = require('express');
+const createError = require('http-errors');
 
 const router = express.Router()
 const user = require('../controllers/user.controller')
@@ -43,6 +44,8 @@ router.get('/my-travels/album/:id', secure.isAuthenticated, albums.exists, album
 router.delete('/my-travels/album/:id', secure.isAuthenticated, albums.exists, albums.isOwned, album.delete)
 
 router.post('/travels/:id', secure.isAuthenticated, travels.exists, like.like)
+
+router.use((req, res, next) => next(createError(404, 'Route not found')))
 
 /* router.post('/my-travels/:id/budget', secure.isAuthenticated, travels.exists, budget.create)
 router.get('/my-travels/:id/budget', secure.isAuthenticated, travels.exists, budgets.exists, budget.detail)
