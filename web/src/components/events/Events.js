@@ -34,8 +34,8 @@ function Events(props) {
     function handleCheckEvent(id, event) {        
         eventService.edit(id, {...event, status: !status})
                 .then(event =>{
-                    props.onEventUpdate() 
                     setValue(!status)
+                    props.onEventUpdate()                    
                 })
                 .catch(error => console.error(error))
     }

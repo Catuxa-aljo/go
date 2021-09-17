@@ -102,7 +102,7 @@ function TravelNew({ onTravelUpdate }) {
     }
 
     return(
-        <div className="container form-modal">
+        <div className="container form-modal scale-in-center">
             <div className="red"><i className="fas fa-times-circle" role="button" onClick={onTravelUpdate}></i></div>
             <h1>Add a new travel </h1>
             <form onSubmit={handleSubmit}>

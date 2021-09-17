@@ -191,6 +191,11 @@ function EventNew(props) {
             </div>
             </>
             }
+            {/* It's confirmed?
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option name="status" onChange={handleChange} value={false}>No</option>
+                <option name="status" onChange={handleChange} value={true}>Yes</option>
+            </select> */}
             <div className="form-check">
                 <input  name="status" 
                         className="form-check-input" 
@@ -198,12 +203,12 @@ function EventNew(props) {
                         value={checkBox}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        onClick={(e) => handleCheck(e)}
+                        onClick={handleCheck}
                         id="flexCheckDefault"/>
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                     Status
                 </label>
-            </div>
+            </div> 
             <button className="btn btn-outline-secondary" type="submit" disabled={!isFormValid()}> {`New item for ${props.category}`} </button>
             </form>
         </div>

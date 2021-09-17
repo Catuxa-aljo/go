@@ -282,6 +282,15 @@ article {
   background: linear-gradient(180deg, #00C9FF 0%, #92FE9D 100%) !important;
 }
 
+.vertical-timeline a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.vertical-timeline a:hover {
+  color: indianred;
+}
+
 .event-detail {
   display: flex;
   justify-content: space-between;
@@ -289,6 +298,14 @@ article {
 
 .event-detail > div {
   width: 30%;
+}
+
+.events-list a:hover {
+  color: indianred;
+}
+
+.item-checked a:hover {
+ color: lightcoral !important;
 }
 
 .time-detail {
@@ -414,6 +431,8 @@ article {
   left: 0;
   right: 0;
   bottom: 0;
+  margin: auto;
+  margin-top: 20px;
   padding: 15%;
   background-color: rgba(0,0,0,0.8);
   z-index: 2;
@@ -971,3 +990,32 @@ figure.effect-ruby:hover p {
 }
 
 
+.scale-out-center {
+	-webkit-animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: scale-out-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@-webkit-keyframes scale-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
+@keyframes scale-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
