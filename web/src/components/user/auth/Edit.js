@@ -117,7 +117,7 @@ function EditProfile({name, avatar, password}) {
                                 aria-label="Avatar" 
                                 aria-describedby="Add an avatar"/>
                     </div>
-                    <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()}>Register</button>
+                    <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()}>Update your profile</button>
                 
                 </form>
 

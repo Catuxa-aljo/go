@@ -10,7 +10,10 @@ function Timeline({startDate, endDate, name, description, id, category, time, st
 
     let route = `categories.${category}.icon`
 
-    return(      
+    return( <>
+
+            {category != 'Lugage' &&
+
             <VerticalTimelineElement            
             className="vertical-timeline-element--work"
             contentStyle={{ background: '#00C9FF', color: '#fff' }}
@@ -25,9 +28,10 @@ function Timeline({startDate, endDate, name, description, id, category, time, st
             <p>
             {description}
             </p>
-            <h5>Status: {status ? <i className="far fa-calendar-check"></i> : <i className="far fa-calendar"></i>} </h5>    
+            <h5>Status: {status ? <i className="far fa-check-square"></i> : <i className="far fa-square"></i>} </h5>    
             <NavLink className="stretched-link" exact to={`/my-travels/events/${id}`}><i className="fas fa-eye"></i> Details</NavLink>
-        </VerticalTimelineElement>
+        </VerticalTimelineElement>}
+        </>
     )
 }
 

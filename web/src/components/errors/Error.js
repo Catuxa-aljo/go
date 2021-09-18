@@ -1,22 +1,41 @@
 import '../../index.css';
+import imgLogin from '../../assets/img/login.png'
+import imgLost from '../../assets/img/lost.png'
+import { NavLink } from 'react-router-dom';
 
 function Error() {
     return (
         <div className="container">
             {window.location.pathname === '/404' && 
             <>
-            <h1>ERROR 404</h1>
-            <h2>Wow, the world is big so we have troubles finding what you've been looking for</h2>
-            <h3>May you wanna double check what you were searching?</h3>
-            <button>Start over</button>
+            <section className="errors">
+            <div>
+                    <img src={imgLost} alt="login"/>
+                </div>
+                <div>
+                <h1>ERROR 404</h1>
+                <h2>Well, even us get lost sometimes</h2>
+                <h3>Why don't start again?</h3>
+                <NavLink exac to="/" className="p-3"> Start over </NavLink>
+                </div>
+            </section>
             </>
             }
             {window.location.pathname === '/403' && 
             <>
-            <h1>ERROR 403 Forbidden</h1>
-            <h2>Ahoy, you pirate!</h2>
-            <h3>You cant't do that my friend</h3>
-            <button>Start over</button>
+            <section className="errors">
+                <div>
+                    <img src={imgLogin} alt="login"/>
+                </div>
+                <div>
+                <h1>ERROR 403 Forbidden</h1>
+                <h2>Ahoy, Pirats aboard!</h2>
+                <h3>You must be logged to see this content</h3>
+               <NavLink exac to="/login" className="p-3"> Login </NavLink>
+               </div>
+               </section>
+            
+            
             </>
             }
         </div>

@@ -30,7 +30,7 @@ const validations = {
 }
 
 
-function TravelEdit({title, description, participants, startingDate, endDate, cover, budget}) {
+function TravelEdit({title, description, participants, startingDate, endDate, cover, budget, onTravelUpdate, onSubmitForm}) {
 
     const { id } = useParams()
 
@@ -79,9 +79,9 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
     function handleSubmit(e) {
         e.preventDefault()
         travelService.edit(id, travel)
-            .then(travel => {
-               console.log(travel)
-                })
+            .then(travel => { 
+                    onSubmitForm();
+                    onTravelUpdate()} )
             .catch(error  => {
                 const { errors, message} = error.response?.data || error;
                 const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -106,7 +106,7 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
                     <input  name="title" 
                             type="text" 
                             className="form-control"
@@ -132,7 +132,7 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
                     <label htmlFor="floatingTextarea2">Description</label>
                 </div>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-calendar-alt"></i></span>
                     <input  name="startingDate" 
                             type="date" 
                             className="form-control"
@@ -145,7 +145,7 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
                 </div>
                 
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="fa fa-calendar-alt"></i></span>
                     <input  name="endDate" 
                             type="date" 
                             className="form-control"
@@ -168,7 +168,7 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
                             aria-describedby="Add a cover for your travel"/>
                 </div>
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-coins"></i></span>
                     <input  name="budget" 
                             type="number" 
                             className="form-control"
@@ -179,8 +179,9 @@ function TravelEdit({title, description, participants, startingDate, endDate, co
                             aria-label="budget" 
                             aria-describedby="Do you wanna set an initial budget?"/>
                 </div>
-
-                <button type="submit"> Save Travel </button>
+                <section className="blue">
+                <button className="p-3" type="submit"> Update your Travel </button>
+                </section>
             </form>
 
         </div>

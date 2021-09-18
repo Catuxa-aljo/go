@@ -50,7 +50,7 @@ header{
   max-width: 400px;
 }
 
-.home a, button, .blue a{
+.home a, button, .blue a, .errors a{
   background-color: indianred !important;
   color: #fff !important;
   font-size: 1rem;
@@ -66,7 +66,7 @@ header{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.home a:hover, button:hover, .blue a:hover {
+.home a:hover, button:hover, .blue a:hover, .errors a:hover {
   background-color: crimson !important;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0);
 }
@@ -168,7 +168,24 @@ article {
   align-items: center;
   margin: auto;
   padding-top:30% ;
-  
+}
+
+#bt-add {
+  width: 100% !important;
+  max-width: 900px;
+  border-radius: 5px !important;
+  background-color: #92FE9D !important;
+  font-size: 1rem;
+}
+
+#bt-add:hover {
+  background-color: #00C9FF !important;
+}
+
+.under-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .travel-resume {
@@ -176,18 +193,55 @@ article {
   text-align: left;
   color: #fff;
   margin: 0 2%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.edit {
+  display: flex;
+  background-color: indianred;
+  padding: 5%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit i:hover {
+  color: #92FE9D;
+}
+
+.edit h3 {
+  margin: 0 !important;
 }
 
 .travel-resume h3{
   font-size: 1rem;
+  margin: 10% 0;
 }
 
 .travel-resume h2{
   font-size: 1.5rem;
 }
 
+.travel-resume input {
+  background-color: transparent;
+  color: #fff;
+
+}
+
+.event-resume i:hover {
+  color: indianred;
+}
+
 .travel-resume img{
   width: 100%;
+}
+
+.profile {
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
 }
 
 .travel-resume > div {
@@ -219,6 +273,16 @@ article {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.errors {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.accordion-button h3 i {
+  font-size: 3rem;
 }
 
 .accordion-body {
@@ -262,6 +326,62 @@ article {
   justify-content: space-between;
 }
 
+.review {
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.review div {
+  width: 60px;
+}
+
+.review-text {
+  text-align: center !important;
+  padding: 0 3%;
+}
+
+.review-text blockquote::before{
+  font-size: 1rem;
+  margin: auto;
+  position: relative;
+}
+
+.review-text blockquote {
+  margin: 0;
+  text-align: left !important;
+}
+
+.review-text a{
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.review-text a:hover{
+  color: indianred;
+  text-decoration: none;
+}
+
+.review-text blockquote::after{
+  font-size: 1rem;
+  margin: auto;
+  position: relative;
+  margin-right: 8rem;
+  margin-top: auto;
+}
+
+.reviews {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-content: center
+}
+
 .event-resume-action {
   margin: 5% 0;
 }
@@ -282,6 +402,10 @@ article {
 
 .error {
   color: indianred;
+}
+
+.value {
+  color: #92FE9D;
 }
 
 .budget i {

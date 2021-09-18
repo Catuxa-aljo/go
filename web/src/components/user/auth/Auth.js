@@ -93,7 +93,7 @@ function Login () {
         <div className="home">
             <div className="container">
             <h1>Login</h1>
-            <p>Lorem fistrum a gramenawer por la gloria de mi madre pupita al ataquerl llevame al sircoo la caidita. Jarl está la cosa muy malar a gramenawer a peich no te digo trigo por no llamarte Rodrigor no puedor diodenoo caballo blanco caballo negroorl apetecan. Apetecan no te digo trigo por no llamarte Rodrigor a peich tiene musho peligro quietooor qué dise usteer amatomaa sexuarl mamaar se calle ustée por la gloria de mi madre. Está la cosa muy malar no puedor jarl hasta luego Lucas no puedor me cago en tus muelas benemeritaar mamaar ese pedazo de a wan quietooor. No puedor no te digo trigo por no llamarte Rodrigor mamaar caballo blanco caballo negroorl pupita fistro la caidita hasta luego Lucas amatomaa. Qué dise usteer sexuarl de la pradera pecador.</p>
+            <h2>The world is big and there's no time to lose. Log now!</h2>
             <form onSubmit={handleSubmit}>
                 <div className="input-group flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
@@ -124,8 +124,9 @@ function Login () {
                         aria-describedby="write your password"/>
                 </div>
                 {touched.password && <h6><i className={errors.password ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.password ? errors.password : 'All good!'}</h6>}
-
+                <section className="blue">
                 <button type="submit" className="btn btn-outline-secondary" disabled={!isFormValid()} >LOGIN</button>
+                </section>
             </form>
             </div>
         </div>

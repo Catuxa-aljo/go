@@ -17,11 +17,20 @@ function Me() {
 
     return(
         <>{!isLoading && 
-        <div>
+        
+        <div className="container">
+            
+            <div className="profile">      
+            
             <img src={user.avatar} alt={user.name} />
-            <h1>{user.name}</h1>            
-        </div>}
-        <EditProfile {...user} />
+             <div>      
+             <h1>Welcome back {user.name}!</h1>
+                <EditProfile {...user} />
+             </div>
+            </div>
+        </div>
+        }
+        
         </>
     )
 

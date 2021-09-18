@@ -31,13 +31,6 @@ function EventNew(props) {
         
     });
 
-    useState(() => {
-        setEvent({
-            ...event,
-            status: checkBox
-        })
-    }, [])
-
 
     const [errors, setErrors] = useState({
         name: validations.name(''),
@@ -61,8 +54,7 @@ function EventNew(props) {
             [name]: true})
     }
 
-    function handleCheck(e) {
-        console.log(e.target.value)        
+    function handleCheck(e) {       
         setCheckBox(!checkBox)        
     }
 
@@ -73,9 +65,9 @@ function EventNew(props) {
     function handleSubmit(e) {
         e.preventDefault()
         if ( isFormValid ) {
-            eventService.create(id, event)
-                .then(event => {props.onEventUpdate();
-                                props.onFormSubmit()})
+            eventService.create(id, {...event, status:checkBox})
+                .then(event => {props.onFormSubmit();
+                                props.onEventUpdate()})
                 .catch(error  => {
                     const { errors, message} = error.response?.data || error;
                     const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -138,6 +130,8 @@ function EventNew(props) {
                         aria-describedby="Add an url"/>
             </div>
             <div className="dates">
+            <div>
+            <h3>From</h3>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-calendar-alt"></i></span>
                 <input  name="startDate" 
@@ -150,7 +144,9 @@ function EventNew(props) {
                         aria-label="startingDate" 
                         aria-describedby="When does your travel starts?"/>
             </div>
-            
+            </div>
+            <div>
+                <h3>to</h3>
             <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="fa fa-calendar-alt"></i></span>
                 <input  name="endDate" 
@@ -164,9 +160,12 @@ function EventNew(props) {
                         aria-describedby="When does your travel ends?"/>
             </div>
             </div>
+            </div>
             <div className="dates">
-            <div className="input-group flex-nowrap">
-               <h3>Event Time:</h3>
+                <div>
+                <h3>Event Time:</h3>
+                <div className="input-group flex-nowrap">
+               
                 <span className="input-group-text" id="addon-wrapping"><i className="far fa-clock"></i></span>
                 <input  name="time" 
                         type="time" 
@@ -178,8 +177,10 @@ function EventNew(props) {
                         aria-label="endDate" 
                         aria-describedby="When does your travel ends?"/>
             </div>
-            <div className="input-group flex-nowrap">
+            </div>
+            <div>
                 <h3>Price</h3>
+            <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping"><i className="fas fa-coins"></i></span>
                 <input  name="price" 
                         type="number" 
@@ -192,14 +193,13 @@ function EventNew(props) {
                         aria-describedby="When does your travel ends?"/>
             </div>
             </div>
+            </div>
             </>
             }
-            {/* It's confirmed?
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                <option name="status" onChange={handleChange} value={false}>No</option>
-                <option name="status" onChange={handleChange} value={true}>Yes</option>
-            </select> */}
             <div className="form-check">
+               <label className="form-check-label" htmlFor="flexCheckDefault">
+                   <h3>It's this event confirmed?</h3>
+                </label> 
                 <input  name="status" 
                         className="form-check-input" 
                         type="checkbox" 
@@ -208,9 +208,7 @@ function EventNew(props) {
                         onBlur={handleBlur}
                         onClick={handleCheck}
                         id="flexCheckDefault"/>
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                    Status
-                </label>
+                
             </div> 
             <button className="btn btn-outline-secondary" type="submit" disabled={!isFormValid()}> {`New item for ${props.category}`} </button>
             </form>

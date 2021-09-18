@@ -11,6 +11,7 @@ import EventResume from "./Events-Resume";
 import Map from "../calendar/Calendar";
 import EventsReviews from "./Events-Reviews";
 import '../../index.css';
+import Album from "../album/Album";
 //import App from "../map/Map";
 
 
@@ -20,8 +21,10 @@ function TravelDetail(props) {
   const [travel, setTravel] = useState(null);
   const [loading, setLoading] = useState(true);
   const auth = useContext(AuthContext)
-  const [visible, setVisibility] = useState(true)
   const [formVisibility, setFormVisibility] = useState(false)
+
+  const [ visibility, handleVisibility ] = useState(false)
+  const visibilityForm = useCallback(() => handleVisibility(!visibility), [visibility])
 
   const [fetch, handleFetch] = useState(false);
   const fetchTravels = useCallback(() => handleFetch(!fetch), [fetch])
@@ -40,18 +43,13 @@ function TravelDetail(props) {
       .catch((error) => console.error(error));
       return () => isMounted = false
 
-  }, [fetch]);
+  }, [fetch, visibility]);
 
 
 
   function handleDelete() {
     travelService.remove(id)
       .then(() => history.push('/my-travels'))
-  }
-
-  function handleEdit() {
-    setFormVisibility(true)
-    setVisibility(false)
   }
 
  
@@ -65,15 +63,15 @@ function TravelDetail(props) {
             <h1>{travel.title}</h1>
             <h3><i className="far fa-calendar-alt"></i> From <Moment format="YYYY/MM/DD">{travel.startingDate}</Moment> to <Moment format="YYYY/MM/DD">{travel.endDate}</Moment></h3>
             <h2><i className="far fa-compass"></i> {travel.description}</h2>
-            <h3><i className="far fa-user"></i> {travel.participants}</h3>          
+            <h3><i className="far fa-user"></i>  <span>{travel.participants}</span></h3>          
             {auth?.user?.id === travel.user.id && 
-              <div className="d-flex">
-                <h3><i className="far fa-trash-alt" role="button" onClick={handleDelete} title="delete travel"></i></h3>
-                <h3><i className="far fa-edit" role="button" onClick={handleEdit} title="edit travel"></i> </h3>
+              <div className="edit">
+                 <h3><i className="far fa-edit" role="button" onClick={handleVisibility} title="edit travel"></i> </h3> | 
+                 <h3><i className="far fa-trash-alt" role="button" onClick={handleDelete} title="delete travel"></i></h3>
               </div>
             } 
-            {formVisibility && 
-            <TravelEdit {...travel} />
+            {visibility && 
+            <TravelEdit {...travel}  onTravelUpdate={fetchTravels} onSubmitForm={visibilityForm} />
             }
           </div>      
         </div>
@@ -97,6 +95,9 @@ function TravelDetail(props) {
                 </VerticalTimeline>
                 </div>
                 <div id="slide-3">
+                  <h2>3er STEP: ... make it unforgettable!</h2>
+                  
+                <Album {...travel} />
                 <EventsReviews { ...travel} />
                 </div>
               </div>

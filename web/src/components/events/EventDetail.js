@@ -65,19 +65,21 @@ function EventDetail(props) {
                     {event.reviews && <h5>Reviews</h5>}
                     {event.reviews.map(review => <blockquote>{review.comments}</blockquote>)}
                 </div>
-                <div className="event-resume">      
+                <div className="event-resume">
+                    <div> 
                     <h3>Status:</h3> 
                     {event.status ? <div className="fine"><i className="far fa-calendar-check"></i> Checked </div>: <div className="error"><i className="far fa-calendar"></i> Not checked</div>}     
-                    <h3>Cost:</h3> 
-                    <div>{event.price !== 0 ? `${event.price}` : `--`}</div>
+                    </div>   
+                    <div><h3>Cost:</h3> 
+                    <div>{event.price !== 0 ? `${event.price}€` : `--`}</div>
+                    </div>
                     <div className="event-resume-action">
-                        <i className="fas fa-edit" role="button" onClick={handleVisibility} ></i> 
-                        <i className="far fa-trash-alt" role="button" onClick={ () => handleDelete(event.id) } ></i>
+                        <i className="fas fa-edit" role="button" onClick={handleVisibility} ></i> | <i className="far fa-trash-alt" role="button" onClick={ () => handleDelete(event.id) } ></i>
                     </div>    
                 </div>
             </div> 
             <div>
-               {event.reviews.length < 1 ? <ReviewCreate /> : '' }
+               {event.reviews.length < 1 ? <ReviewCreate onEventUpdate={fetchEvent} /> : '' }
             </div>
                  
           {visibility && <EventEdit {...event} onEventUpdate={fetchEvent} onSubmitForm={visibilityForm}/>}

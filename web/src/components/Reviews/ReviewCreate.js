@@ -4,14 +4,13 @@ import reviewService from '../../services/review.service'
 import {useParams} from 'react-router-dom'
 import Rating from 'react-rating'
 
-function ReviewCreate() {
+function ReviewCreate({onEventUpdate}) {
 
     const { id } = useParams()
 
     const [review, setReview] = useState({
 
         comments:"",
-        stars: 0
         
     })
 
@@ -27,7 +26,7 @@ function ReviewCreate() {
 
         event.preventDefault()
         reviewService.create(id, review)
-            .then(review => {} )
+            .then(review => onEventUpdate() )
             .catch(error  => {
                 const { errors, message} = error.response?.data || error;
                 const touched =  Object.keys(errors || {}).reduce((touched, key) => {
@@ -53,14 +52,6 @@ function ReviewCreate() {
                 </textarea>
                 <label htmlFor="floatingTextarea2">Review</label>
             </div>
-                <div>
-                <h3>Rating (quality)</h3>
-                <input 
-                name="stars"
-                value={review.stars} 
-                onChange={handleChange} />
-                </div>
-                
                 <button type="submit"> Create a new travel </button>
                 </form>
 

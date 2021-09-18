@@ -47,19 +47,24 @@ function TravelList (props) {
                 </div>
             </div>
         }
-        {!isLoading && 
+        {!isLoading && !auth && 
+        <div>
+
+        </div>
+        }
+        {!isLoading && auth &&
         <>
         {visibility &&
         <div>
         <TravelNew onTravelUpdate={visibilityForm} />
         </div>
         } 
-        <div className="container under-modal">
+        <div className="container">
             <h1>Welcome {auth.name}</h1>
             <h2>Start discovering the world! Take a look of your travels</h2>
             <p>it amet consequat erat. In ligula velit, dictum nec libero at, pulvinar consequat odio. Fusce rhoncus suscipit eros. Fusce rutrum lorem ante, et ultrices magna semper ut. Sed ut lorem in ipsum ullamcorper imperdiet.</p>
-            <div>
-                <button onClick={visibilityForm}>Add a new travel</button>
+            <div className="under-modal">
+                <button id="bt-add" onClick={visibilityForm}>Add a new travel <i class="fas fa-plus-circle"></i></button>
             </div>
             <div className="grid">
                 {travels.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(travel => 

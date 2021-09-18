@@ -17,7 +17,7 @@ const travelSchema = new Schema ({
         },
         cover: {
             type: String,
-            default: 'https://img.vectorfair.com/STUDIO-CAM/STUDIO%20CAM%20371%20140319%20A/TM_STUDIO%20CAM%20371-74.jpg'
+            default: 'https://res.cloudinary.com/dxiij3zmj/image/upload/v1631980974/go/acirvuaxm8dwrix7kcno.png'
         },
         endDate: {
             type: String
