@@ -7,13 +7,12 @@ const id = req.params.id;
 
 Travel.findById(id)
     .populate('user')
-/*     .populate({
+    .populate({
         path : 'events',
         populate : {
           path : 'reviews'
         }
-      }) */
-    .populate('events')
+      })   
     .populate('albums')
     .then(travel => {
         

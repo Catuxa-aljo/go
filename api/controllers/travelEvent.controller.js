@@ -17,9 +17,8 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.edit = (req, res, next) => {
-    const data = {name, description, event, startDate, endDate, price, location} = req.body;
-    Object.assign(req.event, data)
-    req.event.save()
+    const data = {name, description, event, startDate, endDate, price, location, status} = req.body;
+    TravelEvent.findByIdAndUpdate(req.event.id, data)
         .then(event => res.json(event))
         .catch(next)
 }
