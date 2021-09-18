@@ -5,7 +5,7 @@ module.exports.create = (req, res, next) => {
         title: req.body.title || req.travel.title
     }
 
-    console.info(req.files)
+    console.info('req.files', req.files)
 
     Album.create ({
             ...data, 
