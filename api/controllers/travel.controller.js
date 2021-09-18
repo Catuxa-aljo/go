@@ -9,15 +9,7 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.list = (req, res, next) => {  
-    const select = req.query.select
-    if(select === 'all'){
-        Travel.find()
-        .then(travels => res.json(travels))
-        .catch(next) 
-
-    } else if (select === 'mine'){
         res.json(req.travels)   
-    }  
 }
 
 module.exports.listAll = (req, res, next) => {

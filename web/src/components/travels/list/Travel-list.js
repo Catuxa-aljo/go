@@ -19,7 +19,7 @@ function TravelList (props) {
     }, [visibility])
 
     function fetchTravels () {        
-        travelService.list()
+        travelService.listmine()
         .then(travels => { 
             setTravels(travels)
             setLoading(false) 
