@@ -9,7 +9,7 @@ function EventsReviews({events, user}) {
 
     return(
         <div>
-            EVENTS
+            EVENT REVIEWS
             <ul className="list-group">
             {events.map(event => 
             <ReviewItem {...event} />)}

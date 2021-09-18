@@ -39,6 +39,7 @@ header{
 .home h1 {
   color: #fff;
   font-size: 3rem;
+  text-align: center;
 }
 
 .home h2 {
@@ -180,6 +181,34 @@ article {
 
 #bt-add:hover {
   background-color: #00C9FF !important;
+}
+
+.photoalbum {
+  background-color: #00C9FF;
+  border: thick solid #ccc;
+  color: #fff;
+  font-size: 4rem;
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5%;
+}
+
+.photo {
+  margin: 10% 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.photo a{
+  text-decoration: none;
+  color: #00C9FF;
+  font-weight: bold;
 }
 
 .under-modal {
@@ -352,7 +381,7 @@ article {
 }
 
 .review-text blockquote {
-  margin: 0;
+  margin: 5% 0;
   text-align: left !important;
 }
 
@@ -1209,5 +1238,42 @@ figure.effect-ruby:hover p {
     -webkit-transform: scale(0);
             transform: scale(0);
     opacity: 1;
+  }
+}
+
+
+
+@media(max-width: 768px) {
+  body {
+      padding: 0;
+  }
+
+  #what, #how {
+    flex-direction:column-reverse ;
+  }
+
+  .errors, .dates, .travel, .event-detail, .profile {
+    flex-direction:column
+  }
+  .event-detail > div {
+    width: 100%;
+  }
+
+  .numbers {
+    margin-top: 10%;
+  }
+
+  .form-modal {
+    overflow: scroll;
+    margin-top: 20%;
+  }
+
+  #what img, #how img, .errors img {
+    width: 100%;
+  }
+
+  .blue {
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -16,7 +16,7 @@ function Error() {
                 <h1>ERROR 404</h1>
                 <h2>Well, even us get lost sometimes</h2>
                 <h3>Why don't start again?</h3>
-                <NavLink exac to="/" className="p-3"> Start over </NavLink>
+                <NavLink exact to="/" className="p-3"> Start over </NavLink>
                 </div>
             </section>
             </>
@@ -31,7 +31,7 @@ function Error() {
                 <h1>ERROR 403 Forbidden</h1>
                 <h2>Ahoy, Pirats aboard!</h2>
                 <h3>You must be logged to see this content</h3>
-               <NavLink exac to="/login" className="p-3"> Login </NavLink>
+               <NavLink exact to="/login" className="p-3"> Login </NavLink>
                </div>
                </section>
             

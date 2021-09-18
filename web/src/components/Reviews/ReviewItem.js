@@ -8,7 +8,8 @@ function ReviewItem ({id, category, reviews, name}) {
 
 
     return(
-        <li className="list-group-item reviews">
+        <>
+       {reviews.length > 0 && <li className="list-group-item reviews">
             <div className="review" style={{ background:`${categories[category].bgcolor}`, color:'#fff' }}>
                 {<i className={categories[category].icon}></i>}
             </div>
@@ -21,7 +22,8 @@ function ReviewItem ({id, category, reviews, name}) {
                     {reviews?.map(review => <blockquote className="review-text" key={review.id}>{review.comments}</blockquote>)}
                 </div>
             </div>
-    </li>
+    </li>}
+    </>
     )
 }
 
