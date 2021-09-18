@@ -35,10 +35,7 @@ function Header () {
                             <a className="nav-link" href="/#what">What is go?</a>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link"exact to="/travels">Get inspired</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/" >My travels</NavLink>
+                            <NavLink className="nav-link"exact to="/travels">My travels</NavLink>
                         </li>
                     </ul>
                     <ul className="navbar-nav">

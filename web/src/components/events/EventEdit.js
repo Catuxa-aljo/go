@@ -109,7 +109,7 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
 
 
     return(
-        <div className="event-form">
+        <div className="event-form scale-in-center">
             <form onSubmit={handleSubmit}>
             <div className="red"><i className="fas fa-times-circle" role="button" onClick={onSubmitForm}></i></div>
             <div className="input-group flex-nowrap">

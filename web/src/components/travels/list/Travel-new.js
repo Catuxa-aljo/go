@@ -118,7 +118,8 @@ function TravelNew({ onTravelUpdate }) {
                             aria-label="Name" 
                             aria-describedby="Add Travel name"/>
                 </div>
-                {touched.title && <div>{errors.title}</div>}
+                {touched.title && <h6><i className={errors.title ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.title ? errors.title : 'All good!'}</h6>}
+
                 <div className="form-floating">
                     <textarea 
                             name="description"
@@ -160,7 +161,8 @@ function TravelNew({ onTravelUpdate }) {
                                 aria-label="startingDate" 
                                 aria-describedby="When does your travel starts?"/>
                     </div>
-                {touched.startingDate && <div>{errors.startingDate}</div>}
+                    {touched.startingDate && <h6><i className={errors.startingDate ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.startingDate ? errors.startingDate : 'All good!'}</h6>}
+
                 </div>
                 <div>
                     <h3>End Date</h3>
@@ -176,7 +178,8 @@ function TravelNew({ onTravelUpdate }) {
                                 aria-label="endDate" 
                                 aria-describedby="When does your travel ends?"/>
                     </div>
-                    {touched.endDate && <div>{errors.endDate}</div>}
+                    {touched.endDate && <h6><i className={errors.endDate ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.endDate ? errors.endDate : 'All good!'}</h6>}
+
                 </div>
                 </div>
                 <div className="dates">

@@ -144,7 +144,7 @@ function Register() {
                     aria-describedby="Choose your password"/>
         </div>
         
-        {touched.password && <h6><i classpassword={errors.password ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.password ? errors.password : 'All good!'}</h6>}
+        {touched.password && <h6><i className={errors.password ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.password ? errors.password : 'All good!'}</h6>}
 
         <div className="input-group flex-nowrap">
             <span className="input-group-text" id="addon-wrapping"><i className="far fa-image"></i></span>

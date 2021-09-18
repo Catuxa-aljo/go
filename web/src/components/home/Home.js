@@ -2,6 +2,7 @@
 import Register from "../user/auth/Register"
 import { useContext } from "react"
 import { AuthContext } from '../../contexts/AuthContext'
+import {Helmet} from "react-helmet";
 import img1 from '../../assets/img/what-is-go.png'
 import img2 from '../../assets/img/portable.png'
 import img3 from '../../assets/img/organize.png'
@@ -13,6 +14,11 @@ function Home () {
     const auth = useContext(AuthContext)  
     return(
         <>
+         <Helmet>
+                <meta charSet="utf-8" />
+                <title>Go. The voyager planner </title>
+                <meta name="description" content="Start planning your trips in advance and keep a record of them" />
+          </Helmet>
         <div className="home" id="home">
             <img src="./assets/img/go-voyager.png" alt="Go. The voyager planner" className="bounce-in-top" />
             <h1 className="tracking-in-expand">The voyager planner</h1>

@@ -83,17 +83,19 @@ function EventNew(props) {
                         return touched;
                     }, {});           
                     setErrors({...errors,
-                            title : errors ? undefined : message,
+                            name : errors ? undefined : message,
+                           
                     })
                     setTouched({... touched,
-                            title: errors ? false : true,
+                            name: errors ? false : true,
+                            
                     })
                 })
             }
     }
 
     return(
-        <div className="event-form">
+        <div className="event-form scale-in-center">
             <div className="red"><i className="fas fa-times-circle" role="button" onClick={props.onFormSubmit}></i></div>
             <form onSubmit={handleSubmit}>
             <div className="input-group flex-nowrap">
@@ -108,6 +110,7 @@ function EventNew(props) {
                         aria-label="Name" 
                         aria-describedby="Insert a name"/>
             </div>
+            
             {event.category !== 'Lugage' && 
             <>
             <div className="form-floating">
