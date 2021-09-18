@@ -23,7 +23,7 @@ function Budget ({budget, events, participants}) {
         <tr><td>Number of participants</td><td><span>{participants}</span></td></tr>
         {budget !==0 && <tr className="value"><td>Initial budget</td><td>{budget}€</td></tr>}
         {events.map((event) => (
-          event.category != 'Lugage' ? <tr key={event.id} className={event.price !==0 ? "error" : ''}><td>{event.name}</td><td>{event.price}€</td></tr> : ''
+          event.category != 'Lugage' ? <tr key={event.id} className={event.price !==0 ? "error" : ''}><td>{event.name}</td><td>{event.price !==0 ? "-" : ''}{event.price}€</td></tr> : ''
         ))}
         <tr className="mt-5"><td>Total</td><td>{budget - events.reduce((acc, event) => acc + event.price, 0)}€</td></tr> 
         </tbody>      
