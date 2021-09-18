@@ -28,9 +28,6 @@ app.use('/*', (req, res) => {
   res.sendFile(`${__dirname}/react-app/index.html`)
 })
 
-
-
-
 app.use((error, req, res, next) => {
   if (error instanceof mongoose.Error.ValidationError) {
     error = createError(400, error);
