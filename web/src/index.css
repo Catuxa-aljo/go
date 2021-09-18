@@ -256,7 +256,14 @@ article {
 
 .event-resume {
   border-left: #92FE9D solid thick;
-  padding-left: 5%;
+  padding: 3% 0 0 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event-resume-action {
+  margin: 5% 0;
 }
 
 .budget {
@@ -267,6 +274,14 @@ article {
   font-size: 3rem;
   color: #92FE9D;
   font-weight: bold;
+}
+
+.fine {
+  color: #00C9FF;
+}
+
+.error {
+  color: indianred;
 }
 
 .budget i {
@@ -300,8 +315,45 @@ article {
   width: 30%;
 }
 
+.event-detail h1 {
+  margin-top: 10%;
+}
+
 .events-list a:hover {
   color: indianred;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 15% 0;
+}
+
+.event-detail h5 {
+  margin: 5% 0;
+}
+
+
+blockquote:before {                                     
+  content: open-quote;
+  color: #ccc;
+  font-size: 4rem;
+  font-family: 'antonregular';
+  font-style:normal;
+  position: absolute;
+  margin-top: -0.6em;
+}
+
+blockquote:after {                                     
+  content: close-quote;
+  color: #ccc;
+  font-size: 4rem;
+  font-family: 'antonregular';
+  font-style:normal;
+  position: absolute;
+  margin-right: -0.8em;
+  margin-top: 0.3em;
+
+
 }
 
 .item-checked a:hover {
@@ -309,13 +361,20 @@ article {
 }
 
 .time-detail {
-  background: linear-gradient(180deg, #00C9FF 0%, #92FE9D 100%) !important;
+  border-radius: 15px 15px 0 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 3%;
   color: #fff;
+ 
 }
+
+.time-detail hr {
+  border: #fff solid thin;
+  width: 100%;
+}
+
 
 .slider { 
   overflow: hidden;

@@ -38,23 +38,27 @@ function ReviewCreate() {
     }
 
     return(
-        <div>
-                
+        <div className="container">
+                <h4>Leave a review of this event</h4>
                 <form onSubmit={handleSubmit}>
-                <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-compass"></i></span>
-                    <input  name="comments" 
-                            type="text" 
-                            className="form-control"
-                            value={review.comments} 
-                            onChange={handleChange}
-                            placeholder="Travel name" 
-                            aria-label="Name" 
-                            aria-describedby="Add Travel name"/>
-                </div>
+                <div className="form-floating">
+                <textarea 
+                        name="comments"
+                        className="form-control" 
+                        placeholder="Add your travel description" 
+                        id="floatingTextarea2"
+                        onChange={handleChange}
+                        defaultValue={review.comments}>
+                           
+                </textarea>
+                <label htmlFor="floatingTextarea2">Review</label>
+            </div>
                 <div>
                 <h3>Rating (quality)</h3>
-                <input name="stars" as={Rating} />
+                <input 
+                name="stars"
+                value={review.stars} 
+                onChange={handleChange} />
                 </div>
                 
                 <button type="submit"> Create a new travel </button>
