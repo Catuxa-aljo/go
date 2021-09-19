@@ -39,8 +39,6 @@ function Budget ({budget, events, participants}) {
                 </div>
             </div>
         }
-
-
       </>
 
 
