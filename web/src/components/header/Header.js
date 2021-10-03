@@ -29,7 +29,7 @@ function Header () {
                     <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+                            <NavLink className="nav-link" aria-current="page" exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/#what">What is go?</a>
@@ -44,7 +44,7 @@ function Header () {
                            {auth.user && <NavLink className="nav-link" exact to="/me"><span className="me-3"><img className="avatar" src={auth.user?.avatar} alt="user avatar" /></span></NavLink>}
                         </li>
                         <li className="nav-item">
-                        {!auth.user &&<NavLink className="nav-link" exact to="/#register">Register</NavLink>}
+                        {!auth.user &&<a className="nav-link" href="/#register">Register</a>}
                         {auth.user && <button className="p-2 mt-2" onClick={handleLogout}>Logout</button>}
                         </li>
                     </ul>
