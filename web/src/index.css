@@ -216,7 +216,7 @@ article {
   object-fit: cover;
 }
 
-.photoalbum h3 {
+.photoalbum h2 {
   z-index: 3;
   position: absolute;
   color: #fff;
@@ -234,7 +234,7 @@ article {
 	transform: translate3d(0,20px,0) scale(1.1);
 }
 
-.photoalbum h3:hover {
+.photoalbum h2:hover {
   opacity: 1;
   -webkit-transform: translate3d(0,0,0) scale(1);
 	transform: translate3d(0,0,0) scale(1);
