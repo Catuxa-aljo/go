@@ -1,6 +1,6 @@
 
 import albumService from '../../services/album.services'
-import { useParams } from 'react-router-dom'
+import { useParams, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 function AlbumList() {
@@ -22,24 +22,16 @@ function AlbumList() {
         <>
         {!loading && 
             <div className="container">
-            <h1>{album.title}</h1>
-
-<div class="row">
-
-            {album.pictures.map(picture =>  
-        
-        <div class="card col-sm" >
-<img src={picture} alt={album.title}/> 
-</div>
-            
-                )}
-</div>
-</div>
-
-
-      
-
-
+                <NavLink exact to={`/my-travels/${album.travel.id}`}><button>Return to travel</button> </NavLink> 
+                <h1>{album.title}</h1>
+                <div class="row">
+                    {album.pictures.map(picture =>  
+                        <div class="card col-sm">
+                            <img src={picture} alt={album.title}/> 
+                        </div>        
+                    )}
+                </div>
+            </div>
         }
         {loading && 
             <div className="loading">
@@ -49,7 +41,6 @@ function AlbumList() {
             </div>
         }
     </>
-
     )
 }
 

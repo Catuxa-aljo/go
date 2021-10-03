@@ -5,11 +5,18 @@ function Album({albums, title}) {
     return(
         <div className="photo">
             <div className="photoalbum">
-                <i class="fas fa-camera"></i>
-                <h3>{title}</h3>
-            </div>
-            {console.log(albums)}           
-           {albums.length === 0 ? <AlbumCreate /> : <div><NavLink exact to={`/my-travels/album/${albums[0].id}`} >Visit your photo album</NavLink></div>}
+                {albums.length > 0 
+                    ? 
+                    <div>                        
+                        <NavLink exact to={`/my-travels/album/${albums[0].id}`}> 
+                        <h3><i class="fas fa-camera"></i> Visit your photo album</h3>
+                        <img src={albums[0].pictures[0]}/>
+                        </NavLink>
+                    </div> 
+                    : 
+                    <h3><i class="fas fa-camera"></i> {title}</h3>}                 
+            </div>          
+           
         </div>
        
     )

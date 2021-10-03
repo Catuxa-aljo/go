@@ -93,7 +93,7 @@ function EventResume({events, user, onEventUpdate}) {
             <div className="accordion-item">
               <h2 className="accordion-header" id="flush-headingOne">
                 <button className="accordion-button collapsed scale-in-center"  style={{background:`${data.Museums.bgcolor}`}} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsemuseums" aria-expanded="false" aria-controls="flush-collapseOne">
-                <i className="fas fa-landmark"></i>
+                <h3><i className="fas fa-landmark"></i></h3>
                 <h3 role="button">MUSEUMS</h3>
                 
                 </button>

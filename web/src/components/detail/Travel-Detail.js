@@ -19,6 +19,7 @@ function TravelDetail(props) {
   const { id } = useParams();
   const history = useHistory();
   const [travel, setTravel] = useState(null);
+  const [travelEvents, setTravelEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const auth = useContext(AuthContext)
   const [formVisibility, setFormVisibility] = useState(false)
@@ -38,6 +39,7 @@ function TravelDetail(props) {
         if (isMounted) {
           setTravel(data)
           setLoading(false)
+          setTravelEvents(data.events)
         }
         })
       .catch((error) => console.error(error));
@@ -45,14 +47,23 @@ function TravelDetail(props) {
 
   }, [fetch, visibility]);
 
-
-
   function handleDelete() {
     travelService.remove(id)
       .then(() => history.push('/my-travels'))
   }
 
+  const nowDate = new Date(); 
+  const today = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-' + (nowDate.getDate() < 9 ? `0${nowDate.getDate()}` : nowDate.getDate())  ; 
  
+  function handleTodayEvents() {
+    setTravelEvents(travel.events.filter(event => event.startDate === today))
+  }
+
+  function handleAllEvents() {
+    setTravelEvents(travel.events)
+  }
+
+
   return (
     <div className="container">
       {!loading &&      
@@ -89,9 +100,11 @@ function TravelDetail(props) {
                 <EventResume {...travel } onEventUpdate={fetchTravels} />
                 </div>
                 <div id="slide-2">
+                  <h1>{ today}</h1>
                 <Map events={travel.events} />
                 <VerticalTimeline>
-                {travel.events.sort((a, b) => a.startDate.localeCompare(b.startDate)).map(event => <Timeline key={event.id} {...event} />)}
+                <button onClick={handleTodayEvents} >Today events</button><button onClick={handleAllEvents} >All events</button>
+                {travelEvents.sort((a, b) => a.startDate.localeCompare(b.startDate)).map(event => <Timeline key={event.id} {...event} />)}
                 </VerticalTimeline>
                 </div>
                 <div id="slide-3">

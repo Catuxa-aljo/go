@@ -17,8 +17,7 @@ function ReviewItem ({id, category, reviews, name}) {
                 <div>      
                     <NavLink exact to={`/my-travels/events/${id}`}> {name} </NavLink>
                 </div>
-                <div>
-                    {/* <ReviewCreate {...event} /> */}            
+                <div>      
                     {reviews?.map(review => <blockquote className="review-text" key={review.id}>{review.comments}</blockquote>)}
                 </div>
             </div>
