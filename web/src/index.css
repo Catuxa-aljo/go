@@ -21,6 +21,33 @@ header{
   background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
 }
 
+.bg-danger {
+  background-color: transparent !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: turquoise !important;
+}
+
+.input-group-text {
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background-color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home .input-group-text {
+  background: #fff ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home input {
+  background: none;
+  background-color: transparent;
+  color: #fff;
+}
+
 .navbar-brand img {
   max-width: 100px;
 }
@@ -65,6 +92,12 @@ header{
   text-align: center;
   transition-duration: 0.4s;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.travel button, form button, .errors a {
+  padding: 3% !important;
+  align-self: center;
+  margin-top: 8% !important;
 }
 
 .home a:hover, button:hover, .blue a:hover, .errors a:hover {
@@ -1292,7 +1325,7 @@ figure.effect-ruby:hover p {
     flex-direction:column-reverse ;
   }
 
-  .errors, .dates, .travel, .event-detail, .profile {
+  .errors, .dates, .travel, .event-detail, .profile, .photo {
     flex-direction:column
   }
   .event-detail > div {

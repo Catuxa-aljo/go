@@ -223,7 +223,9 @@ function EventEdit ({name, description, url, startDate, endDate, time, price, st
                         onChange={handleChange}
                         onBlur={handleBlur}
                         onClick={handleCheck}
-                        id="flexCheckDefault"/>
+                        id="flexCheckDefault"
+                        defaultChecked={event.status}/>
+                        
                 
             </div> 
             <button className="btn btn-outline-secondary" type="submit" > Update</button>

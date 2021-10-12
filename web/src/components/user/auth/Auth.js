@@ -111,7 +111,7 @@ function Login () {
                 {touched.email && <h6><i className={errors.email ? "fas fa-exclamation-triangle" : "fas fa-check" }></i> {errors.email ? errors.email : 'All good!'}</h6>}
 
                 <div className="input-group flex-nowrap">
-                    <span className="input-group-text" id="addon-wrapping"><i className="far fa-user"></i></span>
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-unlock-alt"></i></span>
                     <input 
                         name="password" 
                         type="password"

@@ -56,11 +56,6 @@
   .container {
     padding-top: 2%;
   }
-
-  .form-control.is-invalid, .was-validated .form-control:invalid input{
-    background: transparent;
-    background-color: rgb(233, 198, 198) !important
-  }
   
   h6 {
     font-family:'open_sanssemibold';
