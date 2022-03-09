@@ -16,8 +16,8 @@ function Timeline({startDate, endDate, name, description, id, category, time, st
 
             <VerticalTimelineElement            
             className="vertical-timeline-element--work"
-            contentStyle={{ background: '#00C9FF', color: '#fff' }}
-            contentArrowStyle={{ borderRight: '7px solid  #00C9FF' }}
+            contentStyle={{ background: 'var(--primaryy-color)', color: '#fff' }}
+            contentArrowStyle={{ borderRight: '7px solid  var(--primaryy-color)' }}
             date={<Moment>{startDate}</Moment>}
             iconStyle={{ background:`${categories[category].bgcolor}`, color: '#fff' }}
             icon={<i className={categories[category].icon}></i> }

@@ -1,4 +1,13 @@
 
+:root {
+  --head-font: ;
+  --primary-color: #00C9FF;
+  --secondary-color: #92FE9D;
+  --auxiliar-color: indianred;
+  --gradient: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  --vertical-gradient: linear-gradient(180deg, #00C9FF 0%, #92FE9D 100%)
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -13,12 +22,12 @@ header{
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: #92FE9D solid medium;
+  border: var(--secondary-color) solid medium;
  
 }
 
 .navbar{
-  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--gradient);
 }
 
 .bg-danger {
@@ -30,7 +39,7 @@ input:-internal-autofill-selected {
 }
 
 .input-group-text {
-  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--gradient);
   background-color: #fff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,7 +67,7 @@ input:-internal-autofill-selected {
   justify-content: center;
   align-items: center;
   padding: 10%;
-  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--gradient);
   width: 100%;
   height: 100%;
 }
@@ -79,7 +88,7 @@ input:-internal-autofill-selected {
 }
 
 .home a, button, .blue a, .errors a{
-  background-color: indianred !important;
+  background-color: var(--auxiliar-color) !important;
   color: #fff !important;
   font-size: 1rem;
   border-radius: 15px !important;
@@ -106,7 +115,7 @@ input:-internal-autofill-selected {
 }
 
 h1 {
-  color: #00C9FF
+  color: var(--primaryy-color)
 }
 
 .blue img {
@@ -116,7 +125,7 @@ h1 {
 
 
 .slides h2 {
-  color: #00C9FF;
+  color: var(--primaryy-color);
   font-family: 'antonregular';
   text-align: center;
   
@@ -129,8 +138,8 @@ p {
 article > .numbers {
   width: 200px;
   height: 200px;
-  background-color: #00C9FF !important;
-  color: #00C9FF;
+  background-color: var(--primaryy-color) !important;
+  color: var(--primaryy-color);
   font-size: 4rem;
   display: contents;
   flex-direction: column;
@@ -147,12 +156,12 @@ section {
 }
 
 section h2 {
-  color:#00C9FF;
+  color:var(--primaryy-color);
   font-family: 'antonregular';
 }
 
 section h3 {
-  color: #92FE9D;
+  color: var(--secondary-color);
   font-size: 1.5rem;
   font-family:'antonregular';
 }
@@ -170,7 +179,7 @@ article {
 }
 
 #register input {
-  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--gradient);
   color: #fff;
 }
 
@@ -185,7 +194,7 @@ article {
 }
 
 .card h3 {
-  color: #92FE9D;
+  color: var(--secondary-color);
   font-size: 'open_sanslight' ;
 }
 
@@ -208,16 +217,16 @@ article {
   width: 100% !important;
   max-width: 900px;
   border-radius: 5px !important;
-  background-color: #92FE9D !important;
+  background-color: var(--secondary-color) !important;
   font-size: 1rem;
 }
 
 #bt-add:hover {
-  background-color: #00C9FF !important;
+  background-color: var(--primaryy-color) !important;
 }
 
 .photoalbum {
-  background-color: #00C9FF;
+  background-color: var(--primaryy-color);
   border: thick solid #ccc;
   color: #fff;
   font-size: 4rem;
@@ -286,7 +295,7 @@ article {
 
 .photo a{
   text-decoration: none;
-  color: #00C9FF;
+  color: var(--primaryy-color);
   font-weight: bold;
 }
 
@@ -297,7 +306,7 @@ article {
 }
 
 .travel-resume {
-  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--gradient);
   text-align: left;
   color: #fff;
   margin: 0 2%;
@@ -308,7 +317,7 @@ article {
 
 .edit {
   display: flex;
-  background-color: indianred;
+  background-color: var(--auxiliar-color);
   padding: 5%;
   text-align: center;
   justify-content: center;
@@ -316,7 +325,7 @@ article {
 }
 
 .edit i:hover {
-  color: #92FE9D;
+  color: var(--secondary-color);
 }
 
 .edit h3 {
@@ -339,7 +348,7 @@ article {
 }
 
 .event-resume i:hover {
-  color: indianred;
+  color: var(--auxiliar-color);
 }
 
 .travel-resume img{
@@ -367,7 +376,7 @@ article {
 }
 
 .accordion-button {
-  background: linear-gradient(180deg, #00C9FF 0%, #92FE9D 100%);
+  background: var(--vertical-gradient);
   color: #fff;
   height: 150px;
   padding: 3%;
@@ -427,7 +436,7 @@ article {
 }
 
 .event-resume {
-  border-left: #92FE9D solid thick;
+  border-left: var(--secondary-color) solid thick;
   padding: 3% 0 0 5%;
   display: flex;
   flex-direction: column;
@@ -471,7 +480,7 @@ article {
 }
 
 .review-text a:hover{
-  color: indianred;
+  color: var(--auxiliar-color);
   text-decoration: none;
 }
 
@@ -500,20 +509,20 @@ article {
 
 .offcanvas span {
   font-size: 3rem;
-  color: #92FE9D;
+  color: var(--secondary-color);
   font-weight: bold;
 }
 
 .fine {
-  color: #00C9FF;
+  color: var(--primaryy-color);
 }
 
 .error {
-  color: indianred;
+  color: var(--auxiliar-color);
 }
 
 .value {
-  color: #92FE9D;
+  color: var(--secondary-color);
 }
 
 .budget i {
@@ -526,7 +535,7 @@ article {
 }
 
 .vertical-timeline::before {
-  background: linear-gradient(180deg, #00C9FF 0%, #92FE9D 100%) !important;
+  background: var(--vertical-gradient) !important;
 }
 
 .vertical-timeline a {
@@ -535,7 +544,7 @@ article {
 }
 
 .vertical-timeline a:hover {
-  color: indianred;
+  color: var(--auxiliar-color);
 }
 
 .event-detail {
@@ -552,7 +561,7 @@ article {
 }
 
 .events-list a:hover {
-  color: indianred;
+  color: var(--auxiliar-color);
 }
 
 blockquote {
@@ -666,7 +675,7 @@ blockquote:after {
 }
 
 .numbers a {
-  background-color: #00C9FF;
+  background-color: var(--primaryy-color);
   color: #fff;
   display: flex;
   vertical-align: middle;
@@ -703,7 +712,7 @@ blockquote:after {
 }
 
 .add-list {
-  color: #00C9FF;
+  color: var(--primaryy-color);
 }
 
 .vertical-timeline-element-icon {
@@ -728,7 +737,7 @@ blockquote:after {
 }
 
 .form-modal h3, .event-form h3 {
-  color: #92FE9D;
+  color: var(--secondary-color);
   font-size: 1.2rem;
   padding-top: 2%;
   font-family: 'antonregular';
@@ -744,7 +753,7 @@ blockquote:after {
 
 .red{
   margin-top: 20%;
-  color: indianred;
+  color: var(--auxiliar-color);
   text-align: right;
 }
 .event-form .red {
@@ -761,7 +770,7 @@ blockquote:after {
 }
 
 .card-title {
-  background-color: #92FE9D;
+  background-color: var(--secondary-color);
   color: #333;
 }
 
@@ -859,7 +868,7 @@ figcaption small {
 
 
 figure.effect-ruby {
-	background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+	background: var(--gradient);
 }
 
 figure.effect-ruby img {
