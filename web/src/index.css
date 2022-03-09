@@ -1,6 +1,6 @@
 
 :root {
-  --head-font: ;
+  --head-font: 'antonregular' ;
   --primary-color: #00C9FF;
   --secondary-color: #92FE9D;
   --auxiliar-color: indianred;
@@ -126,7 +126,7 @@ h1 {
 
 .slides h2 {
   color: var(--primaryy-color);
-  font-family: 'antonregular';
+  font-family: var(--head-font);
   text-align: center;
   
 }
@@ -157,13 +157,13 @@ section {
 
 section h2 {
   color:var(--primaryy-color);
-  font-family: 'antonregular';
+  font-family: var(--head-font);
 }
 
 section h3 {
   color: var(--secondary-color);
   font-size: 1.5rem;
-  font-family:'antonregular';
+  font-family:var(--head-font);
 }
 
 section h5 {
@@ -578,7 +578,7 @@ blockquote:before {
   content: open-quote;
   color: #ccc;
   font-size: 4rem;
-  font-family: 'antonregular';
+  font-family: var(--head-font);
   font-style:normal;
   position: absolute;
   margin-top: -0.6em;
@@ -588,7 +588,7 @@ blockquote:after {
   content: close-quote;
   color: #ccc;
   font-size: 4rem;
-  font-family: 'antonregular';
+  font-family: var(--head-font);
   font-style:normal;
   position: absolute;
   margin-right: -0.8em;
@@ -740,7 +740,7 @@ blockquote:after {
   color: var(--secondary-color);
   font-size: 1.2rem;
   padding-top: 2%;
-  font-family: 'antonregular';
+  font-family: var(--head-font);
 }
 
 .form-modal h1, .event-form h1 {
