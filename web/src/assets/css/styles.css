@@ -27,7 +27,7 @@
   }
   
   @font-face {
-    font-family: var(--head-font);
+    font-family: 'antonregular';
     src: url('../fonts/anton-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
